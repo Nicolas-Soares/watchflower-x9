@@ -3,9 +3,10 @@
     "types": ["node"],
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "strict": true
+    "strict": true,
+    "composite": true
   },
   "include": [
     "prisma.config.ts"
-  ]
+  ],
 }
