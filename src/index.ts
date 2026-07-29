@@ -1,8 +1,8 @@
-// LIBS
-import { config } from 'dotenv'
+import 'dotenv/config'
 
-// BLOCKCHAIN CLIENTS
+// CLIENTS
 import { baseClient } from './clients/base.js'
+import { prisma } from './clients/prisma.js'
 
 // UTILS
 import { logger } from './utils/logger-util.js'
@@ -15,10 +15,43 @@ import { io } from './utils/io-util.js'
 import { upsertWalletWatchlistsCommand } from './commands/main-menu-commands/upsert-wallet-watchlists.js'
 import { getWalletBalanceCommand } from './commands/main-menu-commands/get-wallet-balance.js'
 
+async function login() {
+  printAppTitle()
+  const users = await prisma.user.findMany()
+  let user = undefined
+
+  if (!users.length) {
+    let username = ''
+
+    while (!username) {
+      printAppTitle()
+      print('=== Create an user ===')
+      username = await io.question('Username: ')
+    }
+
+    user = await prisma.user.create({ data: { username } })
+
+    logger.info( { user }, 'User created:')
+    print(`User created: ${user.username}`)
+  } else {
+    do {
+      printAppTitle()
+      print('=== Choose an user ===')
+      print(...users.map((user, index) => `${index + 1} - ${user.username}`))
+
+      const userSelection = await io.question('> ')
+      user = users[parseInt(userSelection) - 1]
+    } while (!user)
+  }
+
+  return user
+}
+
 try {
-  config()
+  const ACTIVE_USER = await login()
   
   while (true) {
+    // `>> Logged as [${ACTIVE_USER.username}]`
     printAppTitle()
     print('Choose an option:')
     print(`
