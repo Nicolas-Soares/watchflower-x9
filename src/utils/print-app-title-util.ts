@@ -2,7 +2,7 @@
 import fs from 'fs/promises'
 
 // UTILS
-import { print, clear } from '../utils/ui.js'
+import { print, clear } from './ui-util.js'
 
 const banner = await fs.readFile("./src/banner.txt", "utf8")
 

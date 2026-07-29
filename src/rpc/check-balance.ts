@@ -3,7 +3,7 @@ import { formatEther  } from 'viem'
 
 // UTILS
 import { logger } from '../utils/logger-util.js'
-import { print } from '../utils/ui.js'
+import { print } from '../utils/ui-util.js'
 
 export async function checkBalance(
   { address, client }:
