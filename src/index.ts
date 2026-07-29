@@ -3,11 +3,14 @@ import { baseClient } from './clients/base.js'
 import { formatEther  } from 'viem'
 import { stdin, stdout } from "node:process"
 import { createInterface } from "node:readline/promises"
+import { config } from 'dotenv'
 import fs from 'fs/promises'
+
+config()
 
 const banner = await fs.readFile("./src/banner.txt", "utf8")
 
-// logger.info('Starting Watchflower...')
+logger.info('Starting Watchflower...')
 console.log(banner)
 
 const io = createInterface({
