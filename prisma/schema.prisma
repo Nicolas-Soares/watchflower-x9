@@ -1,0 +1,56 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Blockchain {
+  UNKNOWN
+  BASE
+  ETHEREUM
+}
+
+model User {
+  id                String   @id @default(cuid())
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  username          String   @unique
+  discordWebhookUrl String?
+  discordEnabled    Boolean  @default(false)
+
+  watchlists WatchList[]
+}
+
+model Wallet {
+  id          String      @id @default(cuid())
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  nickname    String      @default("Wallet")
+  blockchain  Blockchain  @default(UNKNOWN)
+  address     String      @unique
+
+  watchListId String
+  watchList   WatchList   @relation(fields: [watchListId], references: [id], onDelete: Cascade)
+}
+
+model WatchList {
+  id        String   @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name      String
+  wallets   Wallet[]
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
