@@ -10,6 +10,7 @@ import { baseClient } from './clients/base.js'
 import { logger } from './utils/logger-util.js'
 import { printAppTitle } from './utils/print-app-title-util.js'
 import { treatError } from './utils/treat-error-util.js'
+import { print } from './utils/ui.js'
 
 // COMMANDS
 import { checkBalance } from './commands/check-balance.js'
@@ -24,8 +25,8 @@ try {
   })
   
   while (true) {
-    console.log('Choose an option:')
-    console.log(`
+    print('Choose an option:')
+    print(`
       1. Get wallet balance
       2. Exit
     `)
@@ -34,17 +35,17 @@ try {
   
     switch (option) {
       case '1':
-        console.log('Insert wallet address:')
-        
+        print('Insert wallet address:')
+
         const walletAddress = await io.question('> ')
 
         await checkBalance({ client: baseClient, address: walletAddress })
         break
       case '2':
-        console.log('Exiting...')
+        print('Exiting...')
         process.exit(0)
       default:
-        console.log('Invalid option.')
+        print('Invalid option.')
     }
   }
 } catch (error) {
