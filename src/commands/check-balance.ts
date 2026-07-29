@@ -15,6 +15,7 @@ export async function checkBalance(
     
     print(`Balance: ${ethBalance} ETH`)
   } catch (error) {
-    logger.error({ error }, `Error checking balance for address ${address}`)
+    print(`Error checking balance for address [${address}]. Please check the logs for more details.`)
+    logger.error({ error }, `Error checking balance for address [${address}]`)
   }
 }

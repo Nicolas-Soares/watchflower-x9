@@ -17,7 +17,6 @@ import { checkBalance } from './commands/check-balance.js'
 
 try {
   config()
-  printAppTitle()
   
   const io = createInterface({
     input: stdin,
@@ -25,6 +24,7 @@ try {
   })
   
   while (true) {
+    printAppTitle()
     print('Choose an option:')
     print(`
       1. Get wallet balance
@@ -35,20 +35,25 @@ try {
   
     switch (option) {
       case '1':
+        printAppTitle()
+        print('=== Get wallet balance ===')
         print('Insert wallet address:')
 
         const walletAddress = await io.question('> ')
 
         await checkBalance({ client: baseClient, address: walletAddress })
+
+        await io.question('> Press ENTER to return to menu...')
         break
       case '2':
         print('Exiting...')
         process.exit(0)
       default:
-        print('Invalid option.')
+        break
     }
   }
 } catch (error) {
+  print('A major error occurred. Please check the logs for more details.')
   const errorMessage = treatError(error)
   logger.error({ error }, `Error: ${errorMessage}`)
   process.exit(1)
