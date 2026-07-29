@@ -1,42 +1,54 @@
-import { logger } from './logger.js'
-import { baseClient } from './clients/base.js'
-import { formatEther  } from 'viem'
+// LIBS
 import { stdin, stdout } from "node:process"
 import { createInterface } from "node:readline/promises"
 import { config } from 'dotenv'
-import fs from 'fs/promises'
 
-config()
+// BLOCKCHAIN CLIENTS
+import { baseClient } from './clients/base.js'
 
-const banner = await fs.readFile("./src/banner.txt", "utf8")
+// UTILS
+import { logger } from './utils/logger-util.js'
+import { printAppTitle } from './utils/print-app-title-util.js'
+import { treatError } from './utils/treat-error-util.js'
 
-logger.info('Starting Watchflower...')
-console.log(banner)
+// COMMANDS
+import { checkBalance } from './commands/check-balance.js'
 
-const io = createInterface({
-  input: stdin,
-  output: stdout,
-})
+try {
+  config()
+  printAppTitle()
+  
+  const io = createInterface({
+    input: stdin,
+    output: stdout,
+  })
+  
+  while (true) {
+    console.log('Choose an option:')
+    console.log(`
+      1. Get wallet balance
+      2. Exit
+    `)
+  
+    const option = await io.question('> ')
+  
+    switch (option) {
+      case '1':
+        console.log('Insert wallet address:')
+        
+        const walletAddress = await io.question('> ')
 
-while (true) {
-  console.log('Choose an option:')
-  console.log(`
-    1. Get balance
-    2. Exit
-  `)
-
-  const option = await io.question('> ')
-
-  switch (option) {
-    case '1':
-      const balance = await baseClient.getBalance({ address: '0xb8e0410b35a2f23e81369c9defe67d46ae8aa1a1' })
-      console.log(`Balance: ${formatEther(balance)} ETH`)
-      break
-    case '2':
-      console.log('Exiting...')
-      process.exit(0)
-    default:
-      console.log('Invalid option.')
+        await checkBalance({ client: baseClient, address: walletAddress })
+        break
+      case '2':
+        console.log('Exiting...')
+        process.exit(0)
+      default:
+        console.log('Invalid option.')
+    }
   }
+} catch (error) {
+  const errorMessage = treatError(error)
+  logger.error({ error }, `Error: ${errorMessage}`)
+  process.exit(1)
 }
-
