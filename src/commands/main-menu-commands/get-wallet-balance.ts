@@ -8,7 +8,7 @@ import { checkBalance } from '../../rpc/check-balance.js'
 
 export async function getWalletBalanceCommand({ client }: { client: any }): Promise<void> {
   printAppTitle()
-  print('=== Get wallet balance ===')
+  print('=== Get Wallet Balance ===')
   print('Insert wallet address:')
   
   const walletAddress = await io.question('> ')

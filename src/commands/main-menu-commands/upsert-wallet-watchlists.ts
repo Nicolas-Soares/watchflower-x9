@@ -7,14 +7,14 @@ export async function upsertWalletWatchlistsCommand(): Promise<void> {
   let returnToMenu: boolean = false
   
   while (!returnToMenu) {
-    printAppTitle();
-    print("=== Create/Edit wallet watchlists ===");
+    printAppTitle()
+    print("=== Create/Edit Wallet Watchlists ===")
     print(`
       1 - Create new watchlist
       2 - Edit existing watchlist
       3 - Delete watchlist
       4 - Return to main menu
-    `);
+    `)
   
     const watchlistOption = await io.question("> ");
   

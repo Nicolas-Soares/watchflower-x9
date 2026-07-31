@@ -20,13 +20,13 @@ async function createNewUser() {
   
   while (!username) {
     printAppTitle()
-    print('=== Create an user ===')
+    print('=== Create a new user ===')
     username = await io.question('Username: ')
   }
   
   const user = await prisma.user.create({ data: { username } })
   
-  logger.info( { user }, 'User created:')
+  logger.info({ user }, 'User created:')
   print(`User created: ${user.username}`)
 
   return user
@@ -61,7 +61,7 @@ try {
   
   while (true) {
     printAppTitle()
-    print('Choose an option:')
+    print('=== Main Menu ===')
     print(`
       1 - Get wallet balance
       2 - Create/Edit wallet watchlist
@@ -80,7 +80,7 @@ try {
       case '3':
         print('Exiting...')
         process.exit(0)
-     default:
+      default:
         break
     }
   }

@@ -19,7 +19,7 @@ export class AppTitle {
 
   public print(options?: { subHeader?: string }): void {
     clear()
-    print(banner)
+    print(`${banner}\n`)
 
     const textToPrint = options?.subHeader !== undefined ? options.subHeader : this.subHeader
     if (textToPrint) {
