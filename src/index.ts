@@ -6,7 +6,7 @@ import { prisma } from './clients/prisma.js'
 
 // UTILS
 import { logger } from './utils/logger-util.js'
-import { printAppTitle } from './utils/print-app-title-util.js'
+import { printAppTitle, appTitle } from './utils/print-app-title-util.js'
 import { treatError } from './utils/treat-error-util.js'
 import { print } from './utils/ui-util.js'
 import { io } from './utils/io-util.js'
@@ -15,31 +15,39 @@ import { io } from './utils/io-util.js'
 import { upsertWalletWatchlistsCommand } from './commands/main-menu-commands/upsert-wallet-watchlists.js'
 import { getWalletBalanceCommand } from './commands/main-menu-commands/get-wallet-balance.js'
 
+async function createNewUser() {
+  let username = ''
+  
+  while (!username) {
+    printAppTitle()
+    print('=== Create an user ===')
+    username = await io.question('Username: ')
+  }
+  
+  const user = await prisma.user.create({ data: { username } })
+  
+  logger.info( { user }, 'User created:')
+  print(`User created: ${user.username}`)
+
+  return user
+}
+
 async function login() {
   printAppTitle()
   const users = await prisma.user.findMany()
   let user = undefined
 
   if (!users.length) {
-    let username = ''
-
-    while (!username) {
-      printAppTitle()
-      print('=== Create an user ===')
-      username = await io.question('Username: ')
-    }
-
-    user = await prisma.user.create({ data: { username } })
-
-    logger.info( { user }, 'User created:')
-    print(`User created: ${user.username}`)
+    user = await createNewUser()
   } else {
     do {
       printAppTitle()
       print('=== Choose an user ===')
-      print(...users.map((user, index) => `${index + 1} - ${user.username}`))
+      print('0 - Create new user')
+      print(users.map((user, index) => `${index + 1} - ${user.username}`).join('\n'))
 
       const userSelection = await io.question('> ')
+      if (userSelection == '0') return await createNewUser()
       user = users[parseInt(userSelection) - 1]
     } while (!user)
   }
@@ -49,9 +57,9 @@ async function login() {
 
 try {
   const ACTIVE_USER = await login()
+  appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`)
   
   while (true) {
-    // `>> Logged as [${ACTIVE_USER.username}]`
     printAppTitle()
     print('Choose an option:')
     print(`

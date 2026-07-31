@@ -6,9 +6,30 @@ import { print, clear } from './ui-util.js'
 
 const banner = await fs.readFile("./src/banner.txt", "utf8")
 
-export function printAppTitle({ subHeader = '' }: { subHeader?: string } = {}) {
-  clear()
-  print(banner)
+export class AppTitle {
+  public subHeader: string
 
-  if (subHeader) print(subHeader)
+  constructor(subHeader: string = '') {
+    this.subHeader = subHeader
+  }
+
+  public setSubHeader(subHeader: string): void {
+    this.subHeader = subHeader
+  }
+
+  public print(options?: { subHeader?: string }): void {
+    clear()
+    print(banner)
+
+    const textToPrint = options?.subHeader !== undefined ? options.subHeader : this.subHeader
+    if (textToPrint) {
+      print(textToPrint)
+    }
+  }
+}
+
+export const appTitle = new AppTitle()
+
+export function printAppTitle(options?: { subHeader?: string }): void {
+  appTitle.print(options)
 }
