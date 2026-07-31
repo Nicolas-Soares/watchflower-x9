@@ -13,7 +13,7 @@ export async function manageWalletWatchlistsCommand(): Promise<void> {
       1 - Create new watchlist
       2 - Edit existing watchlist
       3 - Delete watchlist
-      4 - Return to main menu
+      0 - Return to main menu
     `)
   
     const watchlistOption = await io.question("> ");
@@ -37,7 +37,7 @@ export async function manageWalletWatchlistsCommand(): Promise<void> {
         await io.question("> Press ENTER to return to menu...");
         returnToMenu = true;
         break;
-      case "4":
+      case "0":
         returnToMenu = true;
         break;
       default:

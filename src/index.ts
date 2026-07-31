@@ -25,7 +25,8 @@ try {
     print(`
       1 - Get wallet balance
       2 - Manage wallet watchlists
-      3 - Exit
+      3 - Logout
+      0 - Exit
     `)
   
     const option = await io.question('> ')
@@ -38,6 +39,10 @@ try {
         await manageWalletWatchlistsCommand()
         break
       case '3':
+        print('WIP...')
+        await io.question("> Press ENTER to return to menu...");
+        break
+      case '0':
         print('Exiting...')
         process.exit(0)
       default:
