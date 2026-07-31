@@ -2,7 +2,6 @@ import 'dotenv/config'
 
 // CLIENTS
 import { baseClient } from './clients/base.js'
-import { prisma } from './clients/prisma.js'
 
 // UTILS
 import { logger } from './utils/logger-util.js'
@@ -12,48 +11,9 @@ import { print } from './utils/ui-util.js'
 import { io } from './utils/io-util.js'
 
 // COMMANDS
-import { upsertWalletWatchlistsCommand } from './commands/main-menu-commands/upsert-wallet-watchlists.js'
+import { manageWalletWatchlistsCommand } from './commands/main-menu-commands/manage-wallet-watchlists.js'
 import { getWalletBalanceCommand } from './commands/main-menu-commands/get-wallet-balance.js'
-
-async function createNewUser() {
-  let username = ''
-  
-  while (!username) {
-    printAppTitle()
-    print('=== Create a new user ===')
-    username = await io.question('Username: ')
-  }
-  
-  const user = await prisma.user.create({ data: { username } })
-  
-  logger.info({ user }, 'User created:')
-  print(`User created: ${user.username}`)
-
-  return user
-}
-
-async function login() {
-  printAppTitle()
-  const users = await prisma.user.findMany()
-  let user = undefined
-
-  if (!users.length) {
-    user = await createNewUser()
-  } else {
-    do {
-      printAppTitle()
-      print('=== Choose an user ===')
-      print('0 - Create new user')
-      print(users.map((user, index) => `${index + 1} - ${user.username}`).join('\n'))
-
-      const userSelection = await io.question('> ')
-      if (userSelection == '0') return await createNewUser()
-      user = users[parseInt(userSelection) - 1]
-    } while (!user)
-  }
-
-  return user
-}
+import { login } from './commands/subcommands/login.js'
 
 try {
   const ACTIVE_USER = await login()
@@ -64,7 +24,7 @@ try {
     print('=== Main Menu ===')
     print(`
       1 - Get wallet balance
-      2 - Create/Edit wallet watchlist
+      2 - Manage wallet watchlists
       3 - Exit
     `)
   
@@ -75,7 +35,7 @@ try {
         await getWalletBalanceCommand({ client: baseClient })
         break
       case '2':
-        await upsertWalletWatchlistsCommand()
+        await manageWalletWatchlistsCommand()
         break
       case '3':
         print('Exiting...')

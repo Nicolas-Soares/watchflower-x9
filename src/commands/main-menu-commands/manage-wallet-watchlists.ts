@@ -3,12 +3,12 @@ import { printAppTitle } from '../../utils/print-app-title-util.js'
 import { print } from '../../utils/ui-util.js'
 import { io } from '../../utils/io-util.js'
 
-export async function upsertWalletWatchlistsCommand(): Promise<void> {
+export async function manageWalletWatchlistsCommand(): Promise<void> {
   let returnToMenu: boolean = false
   
   while (!returnToMenu) {
     printAppTitle()
-    print("=== Create/Edit Wallet Watchlists ===")
+    print("=== Manage Wallet Watchlists ===")
     print(`
       1 - Create new watchlist
       2 - Edit existing watchlist
