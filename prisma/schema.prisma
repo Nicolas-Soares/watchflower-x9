@@ -1,18 +1,10 @@
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
-  engineType = "client"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-}
-
-enum Blockchain {
-  UNKNOWN
-  BASE
-  ETHEREUM
+  provider = "sqlite"
 }
 
 model User {
@@ -29,17 +21,17 @@ model User {
 }
 
 model Wallet {
-  id          String      @id @default(cuid())
+  id          String   @id @default(cuid())
 
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  nickname    String      @default("Wallet")
-  blockchain  Blockchain  @default(UNKNOWN)
-  address     String      @unique
+  nickname    String   @default("Wallet")
+  blockchain  String   @default("UNKNOWN")
+  address     String   @unique
 
   watchListId String
-  watchList   WatchList   @relation(fields: [watchListId], references: [id], onDelete: Cascade)
+  watchList   WatchList @relation(fields: [watchListId], references: [id], onDelete: Cascade)
 }
 
 model WatchList {
@@ -54,3 +46,4 @@ model WatchList {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+

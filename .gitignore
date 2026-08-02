@@ -1,4 +1,12 @@
 node_modules/
 dist/
+.vite/
+out/
 .vscode/
 .env
+
+# Local SQLite databases
+prisma/*.db
+prisma/*.db-journal
+prisma/*.db-shm
+prisma/*.db-wal
