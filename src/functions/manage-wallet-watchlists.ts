@@ -9,8 +9,6 @@ import editWatchlist from './edit-watchlist.js'
 import deleteWatchlist from './delete-watchlist.js'
 
 export async function manageWalletWatchlists(): Promise<void> {
-  let returnToMenu: boolean = false
-  
   while (true) {
     printAppTitle()
     print("=== Manage Wallet Watchlists ===")

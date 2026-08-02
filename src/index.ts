@@ -15,8 +15,11 @@ import { manageWalletWatchlists } from './functions/manage-wallet-watchlists.js'
 import { getWalletBalance } from './services/get-wallet-balance.js'
 import { login } from './functions/login.js'
 
+// TYPES
+import type { User } from './shared/types/user.js'
+
 // GLOBALS
-let ACTIVE_USER
+let ACTIVE_USER: User
 
 try {
   ACTIVE_USER = await login()
