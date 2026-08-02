@@ -3,10 +3,15 @@ import { printAppTitle } from '../utils/print-app-title-util.js'
 import { print } from '../utils/ui-util.js'
 import { io } from '../utils/io-util.js'
 
-export async function manageWalletWatchlistsCommand(): Promise<void> {
+// FUNCTIONS
+import createWatchlist from './create-watchlist.js'
+import editWatchlist from './edit-watchlist.js'
+import deleteWatchlist from './delete-watchlist.js'
+
+export async function manageWalletWatchlists(): Promise<void> {
   let returnToMenu: boolean = false
   
-  while (!returnToMenu) {
+  while (true) {
     printAppTitle()
     print("=== Manage Wallet Watchlists ===")
     print(`
@@ -20,26 +25,19 @@ export async function manageWalletWatchlistsCommand(): Promise<void> {
   
     switch (watchlistOption) {
       case "1":
-        print("Creating new watchlist...");
-        // call create watchlist function
+        await createWatchlist()
         await io.question("> Press ENTER to return to menu...");
-        returnToMenu = true;
-        break;
+        return;
       case "2":
-        print("Editing existing watchlist...");
-        // call edit watchlist function
+        await editWatchlist()
         await io.question("> Press ENTER to return to menu...");
-        returnToMenu = true;
-        break;
+        return;
       case "3":
-        print("Deleting watchlist...");
-        // call delete watchlist function
+        await deleteWatchlist()
         await io.question("> Press ENTER to return to menu...");
-        returnToMenu = true;
-        break;
+        return;
       case "0":
-        returnToMenu = true;
-        break;
+        return;
       default:
         break;
     }

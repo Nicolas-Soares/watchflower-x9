@@ -11,8 +11,8 @@ import { print } from './utils/ui-util.js'
 import { io } from './utils/io-util.js'
 
 // FUNCTIONS
-import { manageWalletWatchlistsCommand } from './functions/manage-wallet-watchlists.js'
-import { getWalletBalanceCommand } from './functions/get-wallet-balance.js'
+import { manageWalletWatchlists } from './functions/manage-wallet-watchlists.js'
+import { getWalletBalance } from './services/get-wallet-balance.js'
 import { login } from './functions/login.js'
 
 try {
@@ -33,10 +33,10 @@ try {
   
     switch (option) {
       case '1':
-        await getWalletBalanceCommand({ client: baseClient })
+        await getWalletBalance({ client: baseClient })
         break
       case '2':
-        await manageWalletWatchlistsCommand()
+        await manageWalletWatchlists()
         break
       case '3':
         print('WIP...')

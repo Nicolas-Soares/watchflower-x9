@@ -6,7 +6,7 @@ import { io } from '../utils/io-util.js'
 // RPC
 import { checkBalance } from '../rpc/check-balance.js'
 
-export async function getWalletBalanceCommand({ client }: { client: any }): Promise<void> {
+export async function getWalletBalance({ client }: { client: any }): Promise<void> {
   printAppTitle()
   print('=== Get Wallet Balance ===')
   print('Insert wallet address:')
