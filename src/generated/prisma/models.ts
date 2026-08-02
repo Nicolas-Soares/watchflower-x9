@@ -10,5 +10,5 @@
  */
 export type * from './models/User.js'
 export type * from './models/Wallet.js'
-export type * from './models/WatchList.js'
+export type * from './models/Watchlist.js'
 export type * from './commonInputTypes.js'

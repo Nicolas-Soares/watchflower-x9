@@ -190,7 +190,7 @@ export type UserWhereInput = {
   username?: Prisma.StringFilter<"User"> | string
   discordWebhookUrl?: Prisma.StringNullableFilter<"User"> | string | null
   discordEnabled?: Prisma.BoolFilter<"User"> | boolean
-  watchlists?: Prisma.WatchListListRelationFilter
+  watchlists?: Prisma.WatchlistListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -200,7 +200,7 @@ export type UserOrderByWithRelationInput = {
   username?: Prisma.SortOrder
   discordWebhookUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   discordEnabled?: Prisma.SortOrder
-  watchlists?: Prisma.WatchListOrderByRelationAggregateInput
+  watchlists?: Prisma.WatchlistOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -213,7 +213,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   discordWebhookUrl?: Prisma.StringNullableFilter<"User"> | string | null
   discordEnabled?: Prisma.BoolFilter<"User"> | boolean
-  watchlists?: Prisma.WatchListListRelationFilter
+  watchlists?: Prisma.WatchlistListRelationFilter
 }, "id" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -247,7 +247,7 @@ export type UserCreateInput = {
   username: string
   discordWebhookUrl?: string | null
   discordEnabled?: boolean
-  watchlists?: Prisma.WatchListCreateNestedManyWithoutUserInput
+  watchlists?: Prisma.WatchlistCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -257,7 +257,7 @@ export type UserUncheckedCreateInput = {
   username: string
   discordWebhookUrl?: string | null
   discordEnabled?: boolean
-  watchlists?: Prisma.WatchListUncheckedCreateNestedManyWithoutUserInput
+  watchlists?: Prisma.WatchlistUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -267,7 +267,7 @@ export type UserUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   discordWebhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  watchlists?: Prisma.WatchListUpdateManyWithoutUserNestedInput
+  watchlists?: Prisma.WatchlistUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -277,7 +277,7 @@ export type UserUncheckedUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   discordWebhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   discordEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  watchlists?: Prisma.WatchListUncheckedUpdateManyWithoutUserNestedInput
+  watchlists?: Prisma.WatchlistUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -448,7 +448,7 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  * UserCountOutputType without action
  */
 export type UserCountOutputTypeCountWatchlistsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.WatchListWhereInput
+  where?: Prisma.WatchlistWhereInput
 }
 
 
@@ -501,7 +501,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    watchlists: Prisma.$WatchListPayload<ExtArgs>[]
+    watchlists: Prisma.$WatchlistPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -904,7 +904,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  watchlists<T extends Prisma.User$watchlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$watchlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WatchListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  watchlists<T extends Prisma.User$watchlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$watchlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WatchlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1337,23 +1337,23 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export type User$watchlistsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the WatchList
+   * Select specific fields to fetch from the Watchlist
    */
-  select?: Prisma.WatchListSelect<ExtArgs> | null
+  select?: Prisma.WatchlistSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the WatchList
+   * Omit specific fields from the Watchlist
    */
-  omit?: Prisma.WatchListOmit<ExtArgs> | null
+  omit?: Prisma.WatchlistOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.WatchListInclude<ExtArgs> | null
-  where?: Prisma.WatchListWhereInput
-  orderBy?: Prisma.WatchListOrderByWithRelationInput | Prisma.WatchListOrderByWithRelationInput[]
-  cursor?: Prisma.WatchListWhereUniqueInput
+  include?: Prisma.WatchlistInclude<ExtArgs> | null
+  where?: Prisma.WatchlistWhereInput
+  orderBy?: Prisma.WatchlistOrderByWithRelationInput | Prisma.WatchlistOrderByWithRelationInput[]
+  cursor?: Prisma.WatchlistWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.WatchListScalarFieldEnum | Prisma.WatchListScalarFieldEnum[]
+  distinct?: Prisma.WatchlistScalarFieldEnum | Prisma.WatchlistScalarFieldEnum[]
 }
 
 /**

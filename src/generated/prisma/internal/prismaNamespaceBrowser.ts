@@ -53,7 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Wallet: 'Wallet',
-  WatchList: 'WatchList'
+  Watchlist: 'Watchlist'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -91,13 +91,13 @@ export const WalletScalarFieldEnum = {
   nickname: 'nickname',
   blockchain: 'blockchain',
   address: 'address',
-  watchListId: 'watchListId'
+  watchlistId: 'watchlistId'
 } as const
 
 export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
-export const WatchListScalarFieldEnum = {
+export const WatchlistScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -105,7 +105,7 @@ export const WatchListScalarFieldEnum = {
   userId: 'userId'
 } as const
 
-export type WatchListScalarFieldEnum = (typeof WatchListScalarFieldEnum)[keyof typeof WatchListScalarFieldEnum]
+export type WatchlistScalarFieldEnum = (typeof WatchlistScalarFieldEnum)[keyof typeof WatchlistScalarFieldEnum]
 
 
 export const SortOrder = {

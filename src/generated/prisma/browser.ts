@@ -28,7 +28,7 @@ export type User = Prisma.UserModel
  */
 export type Wallet = Prisma.WalletModel
 /**
- * Model WatchList
+ * Model Watchlist
  * 
  */
-export type WatchList = Prisma.WatchListModel
+export type Watchlist = Prisma.WatchlistModel

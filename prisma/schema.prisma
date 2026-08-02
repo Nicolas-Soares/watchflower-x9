@@ -25,7 +25,7 @@ model User {
   discordWebhookUrl String?
   discordEnabled    Boolean  @default(false)
 
-  watchlists WatchList[]
+  watchlists Watchlist[]
 }
 
 model Wallet {
@@ -38,11 +38,11 @@ model Wallet {
   blockchain  Blockchain  @default(UNKNOWN)
   address     String      @unique
 
-  watchListId String
-  watchList   WatchList   @relation(fields: [watchListId], references: [id], onDelete: Cascade)
+  watchlistId String
+  watchlist   Watchlist   @relation(fields: [watchlistId], references: [id], onDelete: Cascade)
 }
 
-model WatchList {
+model Watchlist {
   id        String   @id @default(cuid())
 
   createdAt DateTime @default(now())
