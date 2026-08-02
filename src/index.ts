@@ -15,8 +15,11 @@ import { manageWalletWatchlists } from './functions/manage-wallet-watchlists.js'
 import { getWalletBalance } from './services/get-wallet-balance.js'
 import { login } from './functions/login.js'
 
+// GLOBALS
+let ACTIVE_USER
+
 try {
-  const ACTIVE_USER = await login()
+  ACTIVE_USER = await login()
   appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`)
   
   while (true) {
@@ -25,28 +28,21 @@ try {
     print(`
       1 - Get wallet balance
       2 - Manage wallet watchlists
-      3 - Logout
+      3 - Switch user
       0 - Exit
     `)
   
     const option = await io.question('> ')
   
     switch (option) {
-      case '1':
-        await getWalletBalance({ client: baseClient })
-        break
-      case '2':
-        await manageWalletWatchlists()
-        break
+      case '0': print('Exiting...'); process.exit(0);
+      case '1': await getWalletBalance({ client: baseClient }); break;
+      case '2': await manageWalletWatchlists(); break;
       case '3':
-        print('WIP...')
-        await io.question("> Press ENTER to return to menu...");
-        break
-      case '0':
-        print('Exiting...')
-        process.exit(0)
-      default:
-        break
+        ACTIVE_USER = await login();
+        appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`);
+        break;
+      default: break;
     }
   }
 } catch (error) {
