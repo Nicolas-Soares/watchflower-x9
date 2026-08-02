@@ -10,10 +10,10 @@ import { treatError } from './utils/treat-error-util.js'
 import { print } from './utils/ui-util.js'
 import { io } from './utils/io-util.js'
 
-// COMMANDS
-import { manageWalletWatchlistsCommand } from './commands/main-menu-commands/manage-wallet-watchlists.js'
-import { getWalletBalanceCommand } from './commands/main-menu-commands/get-wallet-balance.js'
-import { login } from './commands/subcommands/login.js'
+// FUNCTIONS
+import { manageWalletWatchlistsCommand } from './functions/manage-wallet-watchlists.js'
+import { getWalletBalanceCommand } from './functions/get-wallet-balance.js'
+import { login } from './functions/login.js'
 
 try {
   const ACTIVE_USER = await login()
