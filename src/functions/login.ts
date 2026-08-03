@@ -3,8 +3,8 @@ import { prisma } from '../clients/prisma.js'
 
 // UTILS
 import { printAppTitle } from '../utils/print-app-title-util.js'
-import { print } from '../utils/ui-util.js'
-import { io } from '../utils/io-util.js'
+import { logger } from '../utils/logger-util.js'
+import io from '../utils/io-util.js'
 
 // SUBCOMMANDS
 import { createNewUser } from './create-new-user.js'
@@ -15,23 +15,27 @@ import type { User } from '../shared/types/user.js'
 export async function login(): Promise<User> {
   printAppTitle()
 
-  let user: User | undefined = undefined
   const users: User[] = await prisma.user.findMany()
 
-  if (!users.length) {
-    user = await createNewUser()
-  } else {
-    do {
-      printAppTitle()
-      print('=== Choose an user ===')
-      print('0 - Create new user')
-      print(users.map((user, index) => `${index + 1} - ${user.username}`).join('\n'))
+  if (!users.length) return await createNewUser()
 
-      const userSelection = await io.question('> ')
-      if (userSelection == '0') return await createNewUser()
-      user = users[parseInt(userSelection) - 1]
-    } while (!user)
+  while (true) {
+    printAppTitle()
+  
+    const userSelection = await io.select({
+      message: '=== Choose an user ===',
+      choices: [
+        { name: '+ Create new user', value: 'create-new-user' },
+        ...users.map(user => ({ name: user.username, value: user.id }))
+      ]
+    })
+  
+    if (userSelection == 'create-new-user') return await createNewUser()
+  
+    const user = users.find(u => u.id === userSelection)
+  
+    logger.info(`User selected: ${user}`)
+
+    if (user) return user
   }
-
-  return user
 }
