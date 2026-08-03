@@ -5,7 +5,7 @@ import { prisma } from '../clients/prisma.js'
 import { logger } from '../utils/logger-util.js'
 import { printAppTitle } from '../utils/print-app-title-util.js'
 import { print } from '../utils/ui-util.js'
-import { io } from '../utils/io-util.js'
+import io from '../utils/io-util.js'
 
 // TYPES
 import type { User } from '../shared/types/user.js'
@@ -16,7 +16,7 @@ export async function createNewUser(): Promise<User> {
   while (!username) {
     printAppTitle()
     print('=== Create a new user ===')
-    username = await io.question('Username: ')
+    username = await io.input({ message: 'Username: ' })
   }
 
   const user: User = await prisma.user.create({ data: { username } })

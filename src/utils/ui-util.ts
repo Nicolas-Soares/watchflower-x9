@@ -1,7 +1,6 @@
-/**
- * Trims common leading indentation from multiline strings while preserving relative indentation.
- * Also removes empty leading and trailing lines.
- */
+// UTILS
+import io from './io-util.js'
+
 export const dedent = (text: string): string => {
   if (!text || !text.includes('\n')) return text
 
@@ -33,4 +32,11 @@ export const print = (message: string = ''): void => {
 
 export const clear = (): void => {
   console.clear()
+}
+
+export const pressEnterToContinue = async (): Promise<void> => {
+  await io.input({
+    message: '> Press ENTER to return to menu...',
+    validation: false
+  })
 }

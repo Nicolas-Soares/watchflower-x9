@@ -1,6 +1,5 @@
 // LIBS
 import 'dotenv/config'
-import { select as promptSelect } from '@inquirer/prompts'
 
 // CLIENTS
 import { baseClient } from './clients/base.js'
@@ -10,7 +9,7 @@ import { logger } from './utils/logger-util.js'
 import { printAppTitle, appTitle } from './utils/print-app-title-util.js'
 import { treatError } from './utils/treat-error-util.js'
 import { print } from './utils/ui-util.js'
-import { io } from './utils/io-util.js'
+import io from './utils/io-util.js'
 
 // FUNCTIONS
 import { manageWalletWatchlists } from './functions/manage-wallet-watchlists.js'
@@ -32,7 +31,7 @@ async function main() {
     while (true) {
       printAppTitle()
     
-      const option = await promptSelect({
+      const option = await io.select({
         message: '=== Main Menu ===',
         choices: [
           { name: 'Get wallet balance', value: 'balance' },
@@ -43,13 +42,19 @@ async function main() {
       })
       
       switch (option) {
-        case 'exit': print('Exiting...'); process.exit(0);
-        case 'balance': await getWalletBalance({ client: baseClient }); break;
-        case 'manage-watchlists': await manageWalletWatchlists(); break;
+        case 'balance':
+          await getWalletBalance({ client: baseClient });
+          break;
+        case 'manage-watchlists':
+          await manageWalletWatchlists();
+          break;
         case 'switch-user':
           ACTIVE_USER = await login();
           appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`);
-          break;
+            break;
+        case 'exit':
+          print('Exiting...');
+          process.exit(0);
       }
     }
   } catch (error) {

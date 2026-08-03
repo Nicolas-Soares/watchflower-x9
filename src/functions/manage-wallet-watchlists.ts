@@ -1,7 +1,7 @@
 // UTILS
 import { printAppTitle } from '../utils/print-app-title-util.js'
-import { print } from '../utils/ui-util.js'
-import { io } from '../utils/io-util.js'
+import { pressEnterToContinue } from '../utils/ui-util.js'
+import io from '../utils/io-util.js'
 
 // FUNCTIONS
 import createWatchlist from './create-watchlist.js'
@@ -11,33 +11,32 @@ import deleteWatchlist from './delete-watchlist.js'
 export async function manageWalletWatchlists(): Promise<void> {
   while (true) {
     printAppTitle()
-    print("=== Manage Wallet Watchlists ===")
-    print(`
-      1 - Create new watchlist
-      2 - Edit existing watchlist
-      3 - Delete watchlist
-      0 - Return to main menu
-    `)
   
-    const watchlistOption = await io.question("> ");
+    const option = await io.select({
+      message: '=== Manage Wallet Watchlists ===',
+      choices: [
+        { name: 'Create new watchlist', value: 'create-watchlist' },
+        { name: 'Edit existing watchlist', value: 'edit-watchlist' },
+        { name: 'Delete watchlist', value: 'delete-watchlist' },
+        { name: 'Return to main menu', value: 'main-menu' }
+      ]
+    });
   
-    switch (watchlistOption) {
-      case "1":
+    switch (option) {
+      case 'create-watchlist':
         await createWatchlist()
-        await io.question("> Press ENTER to return to menu...");
+        await pressEnterToContinue()
         return;
-      case "2":
+      case 'edit-watchlist':
         await editWatchlist()
-        await io.question("> Press ENTER to return to menu...");
+        await pressEnterToContinue()
         return;
-      case "3":
+      case 'delete-watchlist':
         await deleteWatchlist()
-        await io.question("> Press ENTER to return to menu...");
+        await pressEnterToContinue()
         return;
-      case "0":
+      case 'main-menu':
         return;
-      default:
-        break;
     }
   }
 }

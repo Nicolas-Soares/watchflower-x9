@@ -1,7 +1,7 @@
 // UTILS
 import { printAppTitle } from '../utils/print-app-title-util.js'
-import { print } from '../utils/ui-util.js'
-import { io } from '../utils/io-util.js'
+import { print, pressEnterToContinue } from '../utils/ui-util.js'
+import io from '../utils/io-util.js'
 
 // RPC
 import { checkBalance } from '../rpc/check-balance.js'
@@ -9,10 +9,9 @@ import { checkBalance } from '../rpc/check-balance.js'
 export async function getWalletBalance({ client }: { client: any }): Promise<void> {
   printAppTitle()
   print('=== Get Wallet Balance ===')
-  print('Insert wallet address:')
   
-  const walletAddress = await io.question('> ')
+  const walletAddress = await io.input({ message: 'Insert wallet address:' })
   
   await checkBalance({ client, address: walletAddress })
-  await io.question('> Press ENTER to return to menu...')
+  await pressEnterToContinue()
 }
