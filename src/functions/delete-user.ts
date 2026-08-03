@@ -4,9 +4,6 @@ import { prisma } from '../clients/prisma.js'
 // UTILS
 import io from '../utils/io-util.js'
 
-// TYPES
-import type { User } from '../shared/types/user.js'
-
 export async function deleteUser(): Promise<void> {
   io.printAppTitle()
 
@@ -19,7 +16,7 @@ export async function deleteUser(): Promise<void> {
     ]
   })
 
-  const user: User = await prisma.user.delete({ where: { id: userSelection } })
+  const user = await prisma.user.delete({ where: { id: userSelection } })
 
   io.print(`Deleted user: ${user.username} successfully!`)
   await io.pressEnterToContinue()
