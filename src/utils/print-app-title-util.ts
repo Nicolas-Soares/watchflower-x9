@@ -2,7 +2,7 @@
 import fs from 'fs/promises'
 
 // UTILS
-import { print, clear } from './ui-util.js'
+import io from './io-util.js'
 
 const banner = await fs.readFile("./src/banner.txt", "utf8")
 
@@ -18,12 +18,12 @@ export class AppTitle {
   }
 
   public print(options?: { subHeader?: string }): void {
-    clear()
-    print(`${banner}\n`)
+    io.clear()
+    io.print(`${banner}\n`)
 
     const textToPrint = options?.subHeader !== undefined ? options.subHeader : this.subHeader
     if (textToPrint) {
-      print(textToPrint)
+      io.print(textToPrint)
     }
   }
 }

@@ -1,6 +1,5 @@
 // UTILS
 import { printAppTitle } from '../utils/print-app-title-util.js'
-import { pressEnterToContinue } from '../utils/ui-util.js'
 import io from '../utils/io-util.js'
 
 // FUNCTIONS
@@ -25,15 +24,15 @@ export async function manageWalletWatchlists(): Promise<void> {
     switch (option) {
       case 'create-watchlist':
         await createWatchlist()
-        await pressEnterToContinue()
+        await io.pressEnterToContinue()
         return;
       case 'edit-watchlist':
         await editWatchlist()
-        await pressEnterToContinue()
+        await io.pressEnterToContinue()
         return;
       case 'delete-watchlist':
         await deleteWatchlist()
-        await pressEnterToContinue()
+        await io.pressEnterToContinue()
         return;
       case 'main-menu':
         return;

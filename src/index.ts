@@ -8,7 +8,6 @@ import { baseClient } from './clients/base.js'
 import { logger } from './utils/logger-util.js'
 import { printAppTitle, appTitle } from './utils/print-app-title-util.js'
 import { treatError } from './utils/treat-error-util.js'
-import { print } from './utils/ui-util.js'
 import io from './utils/io-util.js'
 
 // FUNCTIONS
@@ -51,16 +50,19 @@ async function main() {
         case 'switch-user':
           ACTIVE_USER = await login();
           appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`);
-            break;
+          break;
         case 'exit':
-          print('Exiting...');
+          io.print('Exiting...');
           process.exit(0);
       }
     }
   } catch (error) {
-    print('A major error occurred. Please check the logs for more details.')
+    io.print('A major error occurred. Please check the logs for more details.')
+
     const errorMessage = treatError(error)
+
     logger.error({ error }, `Error: ${errorMessage}`)
+    
     process.exit(1)
   }
 }
