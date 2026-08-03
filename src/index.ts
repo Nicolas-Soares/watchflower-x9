@@ -6,7 +6,7 @@ import { baseClient } from './clients/base.js'
 
 // UTILS
 import { logger } from './utils/logger-util.js'
-import { printAppTitle, appTitle } from './utils/print-app-title-util.js'
+import { appTitle } from './utils/print-app-title-util.js'
 import { treatError } from './utils/treat-error-util.js'
 import io from './utils/io-util.js'
 
@@ -28,7 +28,7 @@ async function main() {
     appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`)
   
     while (true) {
-      printAppTitle()
+      io.printAppTitle()
     
       const option = await io.select({
         message: '=== Main Menu ===',

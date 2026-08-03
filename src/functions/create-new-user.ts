@@ -3,7 +3,6 @@ import { prisma } from '../clients/prisma.js'
 
 // UTILS
 import { logger } from '../utils/logger-util.js'
-import { printAppTitle } from '../utils/print-app-title-util.js'
 import io from '../utils/io-util.js'
 
 // TYPES
@@ -12,7 +11,7 @@ import type { User } from '../shared/types/user.js'
 export async function createNewUser(): Promise<User> {
   let username: string = ''
 
-  printAppTitle()
+  io.printAppTitle()
   io.print('=== Create a new user ===')
   username = await io.input({ message: 'Username: ' })
 

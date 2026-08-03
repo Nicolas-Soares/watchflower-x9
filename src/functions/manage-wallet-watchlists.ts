@@ -1,5 +1,4 @@
 // UTILS
-import { printAppTitle } from '../utils/print-app-title-util.js'
 import io from '../utils/io-util.js'
 
 // FUNCTIONS
@@ -9,7 +8,7 @@ import deleteWatchlist from './delete-watchlist.js'
 
 export async function manageWalletWatchlists(): Promise<void> {
   while (true) {
-    printAppTitle()
+    io.printAppTitle()
   
     const option = await io.select({
       message: '=== Manage Wallet Watchlists ===',

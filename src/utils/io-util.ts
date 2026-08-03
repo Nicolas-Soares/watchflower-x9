@@ -4,6 +4,8 @@ import {
   input as promptInput
 } from '@inquirer/prompts'
 
+import { printAppTitle } from './print-app-title-util.js'
+
 function dedent(text: string): string {
   if (!text || !text.includes('\n')) return text
 
@@ -69,5 +71,6 @@ export default {
   input,
   print,
   clear,
-  pressEnterToContinue
+  pressEnterToContinue,
+  printAppTitle
 }

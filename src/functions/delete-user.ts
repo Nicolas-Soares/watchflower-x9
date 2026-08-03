@@ -2,14 +2,13 @@
 import { prisma } from '../clients/prisma.js'
 
 // UTILS
-import { printAppTitle } from '../utils/print-app-title-util.js'
 import io from '../utils/io-util.js'
 
 // TYPES
 import type { User } from '../shared/types/user.js'
 
 export async function deleteUser(): Promise<void> {
-  printAppTitle()
+  io.printAppTitle()
 
   const users = await prisma.user.findMany()
 

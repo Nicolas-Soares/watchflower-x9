@@ -2,7 +2,6 @@
 import { prisma } from '../clients/prisma.js'
 
 // UTILS
-import { printAppTitle } from '../utils/print-app-title-util.js'
 import { logger } from '../utils/logger-util.js'
 import io from '../utils/io-util.js'
 
@@ -14,14 +13,14 @@ import { deleteUser } from './delete-user.js'
 import type { User } from '../shared/types/user.js'
 
 export async function login(): Promise<User> {
-  printAppTitle()
+  io.printAppTitle()
 
   const users = await prisma.user.findMany()
 
   if (!users.length) return await createNewUser()
 
   while (true) {
-    printAppTitle()
+    io.printAppTitle()
   
     const userSelection = await io.select({
       message: '=== Choose an user ===',
