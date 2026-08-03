@@ -1,4 +1,6 @@
+// LIBS
 import 'dotenv/config'
+import { select as promptSelect } from '@inquirer/prompts'
 
 // CLIENTS
 import { baseClient } from './clients/base.js'
@@ -21,36 +23,41 @@ import type { User } from './shared/types/user.js'
 // GLOBALS
 let ACTIVE_USER: User
 
-try {
-  ACTIVE_USER = await login()
-  appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`)
+async function main() {
+  try {
+    ACTIVE_USER = await login()
   
-  while (true) {
-    printAppTitle()
-    print('=== Main Menu ===')
-    print(`
-      1 - Get wallet balance
-      2 - Manage wallet watchlists
-      3 - Switch user
-      0 - Exit
-    `)
+    appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`)
   
-    const option = await io.question('> ')
-  
-    switch (option) {
-      case '0': print('Exiting...'); process.exit(0);
-      case '1': await getWalletBalance({ client: baseClient }); break;
-      case '2': await manageWalletWatchlists(); break;
-      case '3':
-        ACTIVE_USER = await login();
-        appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`);
-        break;
-      default: break;
+    while (true) {
+      printAppTitle()
+    
+      const option = await promptSelect({
+        message: '=== Main Menu ===',
+        choices: [
+          { name: 'Get wallet balance', value: 'balance' },
+          { name: 'Manage wallet watchlists', value: 'manage-watchlists' },
+          { name: 'Switch user', value: 'switch-user' },
+          { name: 'Exit', value: 'exit' }
+        ]
+      })
+      
+      switch (option) {
+        case 'exit': print('Exiting...'); process.exit(0);
+        case 'balance': await getWalletBalance({ client: baseClient }); break;
+        case 'manage-watchlists': await manageWalletWatchlists(); break;
+        case 'switch-user':
+          ACTIVE_USER = await login();
+          appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`);
+          break;
+      }
     }
+  } catch (error) {
+    print('A major error occurred. Please check the logs for more details.')
+    const errorMessage = treatError(error)
+    logger.error({ error }, `Error: ${errorMessage}`)
+    process.exit(1)
   }
-} catch (error) {
-  print('A major error occurred. Please check the logs for more details.')
-  const errorMessage = treatError(error)
-  logger.error({ error }, `Error: ${errorMessage}`)
-  process.exit(1)
 }
+
+main()
