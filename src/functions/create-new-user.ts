@@ -18,7 +18,6 @@ export async function createNewUser(): Promise<User> {
   const user = await prisma.user.create({ data: { username } })
 
   logger.info({ user }, 'User created:')
-  io.print(`User created: ${user.username}`)
 
   return user
 }

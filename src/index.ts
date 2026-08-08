@@ -19,11 +19,14 @@ import { login } from './functions/login.js'
 import type { User } from './shared/types/user.js'
 
 // GLOBALS
-let ACTIVE_USER: User
+import {
+  ACTIVE_USER,
+  setActiveUser
+} from './shared/active-user.js'
 
 async function main() {
   try {
-    ACTIVE_USER = await login()
+    setActiveUser(await login())
   
     appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`)
   
@@ -48,7 +51,7 @@ async function main() {
           await manageWalletWatchlists();
           break;
         case 'switch-user':
-          ACTIVE_USER = await login();
+          setActiveUser(await login())
           appTitle.setSubHeader(`>> Logged as: ${ACTIVE_USER.username}\n`);
           break;
         case 'exit':
