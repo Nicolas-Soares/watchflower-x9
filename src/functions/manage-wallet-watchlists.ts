@@ -23,16 +23,13 @@ export async function manageWalletWatchlists(): Promise<void> {
     switch (option) {
       case 'create-watchlist':
         await createWatchlist()
-        await io.pressEnterToContinue()
-        return;
+        break;
       case 'edit-watchlist':
         await editWatchlist()
-        await io.pressEnterToContinue()
-        return;
+        break;
       case 'delete-watchlist':
         await deleteWatchlist()
-        await io.pressEnterToContinue()
-        return;
+        break;
       case 'main-menu':
         return;
     }
