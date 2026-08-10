@@ -8,6 +8,5 @@ export interface Wallet {
   nickname:     string,
   blockchain?:  Blockchain,
   address:      string,
-  watchlistId:  string,
-  watchlist?:   Watchlist
+  watchlists?:  Watchlist[]
 }

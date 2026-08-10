@@ -90,8 +90,7 @@ export const WalletScalarFieldEnum = {
   updatedAt: 'updatedAt',
   nickname: 'nickname',
   blockchain: 'blockchain',
-  address: 'address',
-  watchlistId: 'watchlistId'
+  address: 'address'
 } as const
 
 export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]

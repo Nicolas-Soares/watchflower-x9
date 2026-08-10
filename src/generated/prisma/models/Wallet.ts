@@ -31,7 +31,6 @@ export type WalletMinAggregateOutputType = {
   nickname: string | null
   blockchain: $Enums.Blockchain | null
   address: string | null
-  watchlistId: string | null
 }
 
 export type WalletMaxAggregateOutputType = {
@@ -41,7 +40,6 @@ export type WalletMaxAggregateOutputType = {
   nickname: string | null
   blockchain: $Enums.Blockchain | null
   address: string | null
-  watchlistId: string | null
 }
 
 export type WalletCountAggregateOutputType = {
@@ -51,7 +49,6 @@ export type WalletCountAggregateOutputType = {
   nickname: number
   blockchain: number
   address: number
-  watchlistId: number
   _all: number
 }
 
@@ -63,7 +60,6 @@ export type WalletMinAggregateInputType = {
   nickname?: true
   blockchain?: true
   address?: true
-  watchlistId?: true
 }
 
 export type WalletMaxAggregateInputType = {
@@ -73,7 +69,6 @@ export type WalletMaxAggregateInputType = {
   nickname?: true
   blockchain?: true
   address?: true
-  watchlistId?: true
 }
 
 export type WalletCountAggregateInputType = {
@@ -83,7 +78,6 @@ export type WalletCountAggregateInputType = {
   nickname?: true
   blockchain?: true
   address?: true
-  watchlistId?: true
   _all?: true
 }
 
@@ -166,7 +160,6 @@ export type WalletGroupByOutputType = {
   nickname: string
   blockchain: $Enums.Blockchain
   address: string
-  watchlistId: string
   _count: WalletCountAggregateOutputType | null
   _min: WalletMinAggregateOutputType | null
   _max: WalletMaxAggregateOutputType | null
@@ -197,8 +190,7 @@ export type WalletWhereInput = {
   nickname?: Prisma.StringFilter<"Wallet"> | string
   blockchain?: Prisma.EnumBlockchainFilter<"Wallet"> | $Enums.Blockchain
   address?: Prisma.StringFilter<"Wallet"> | string
-  watchlistId?: Prisma.StringFilter<"Wallet"> | string
-  watchlist?: Prisma.XOR<Prisma.WatchlistScalarRelationFilter, Prisma.WatchlistWhereInput>
+  watchlists?: Prisma.WatchlistListRelationFilter
 }
 
 export type WalletOrderByWithRelationInput = {
@@ -208,8 +200,7 @@ export type WalletOrderByWithRelationInput = {
   nickname?: Prisma.SortOrder
   blockchain?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  watchlistId?: Prisma.SortOrder
-  watchlist?: Prisma.WatchlistOrderByWithRelationInput
+  watchlists?: Prisma.WatchlistOrderByRelationAggregateInput
 }
 
 export type WalletWhereUniqueInput = Prisma.AtLeast<{
@@ -222,8 +213,7 @@ export type WalletWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   nickname?: Prisma.StringFilter<"Wallet"> | string
   blockchain?: Prisma.EnumBlockchainFilter<"Wallet"> | $Enums.Blockchain
-  watchlistId?: Prisma.StringFilter<"Wallet"> | string
-  watchlist?: Prisma.XOR<Prisma.WatchlistScalarRelationFilter, Prisma.WatchlistWhereInput>
+  watchlists?: Prisma.WatchlistListRelationFilter
 }, "id" | "address">
 
 export type WalletOrderByWithAggregationInput = {
@@ -233,7 +223,6 @@ export type WalletOrderByWithAggregationInput = {
   nickname?: Prisma.SortOrder
   blockchain?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  watchlistId?: Prisma.SortOrder
   _count?: Prisma.WalletCountOrderByAggregateInput
   _max?: Prisma.WalletMaxOrderByAggregateInput
   _min?: Prisma.WalletMinOrderByAggregateInput
@@ -249,7 +238,6 @@ export type WalletScalarWhereWithAggregatesInput = {
   nickname?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
   blockchain?: Prisma.EnumBlockchainWithAggregatesFilter<"Wallet"> | $Enums.Blockchain
   address?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
-  watchlistId?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
 }
 
 export type WalletCreateInput = {
@@ -259,7 +247,7 @@ export type WalletCreateInput = {
   nickname?: string
   blockchain?: $Enums.Blockchain
   address: string
-  watchlist: Prisma.WatchlistCreateNestedOneWithoutWalletsInput
+  watchlists?: Prisma.WatchlistCreateNestedManyWithoutWalletsInput
 }
 
 export type WalletUncheckedCreateInput = {
@@ -269,7 +257,7 @@ export type WalletUncheckedCreateInput = {
   nickname?: string
   blockchain?: $Enums.Blockchain
   address: string
-  watchlistId: string
+  watchlists?: Prisma.WatchlistUncheckedCreateNestedManyWithoutWalletsInput
 }
 
 export type WalletUpdateInput = {
@@ -279,7 +267,7 @@ export type WalletUpdateInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  watchlist?: Prisma.WatchlistUpdateOneRequiredWithoutWalletsNestedInput
+  watchlists?: Prisma.WatchlistUpdateManyWithoutWalletsNestedInput
 }
 
 export type WalletUncheckedUpdateInput = {
@@ -289,7 +277,7 @@ export type WalletUncheckedUpdateInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  watchlistId?: Prisma.StringFieldUpdateOperationsInput | string
+  watchlists?: Prisma.WatchlistUncheckedUpdateManyWithoutWalletsNestedInput
 }
 
 export type WalletCreateManyInput = {
@@ -299,7 +287,6 @@ export type WalletCreateManyInput = {
   nickname?: string
   blockchain?: $Enums.Blockchain
   address: string
-  watchlistId: string
 }
 
 export type WalletUpdateManyMutationInput = {
@@ -318,7 +305,6 @@ export type WalletUncheckedUpdateManyInput = {
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
   blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  watchlistId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type WalletCountOrderByAggregateInput = {
@@ -328,7 +314,6 @@ export type WalletCountOrderByAggregateInput = {
   nickname?: Prisma.SortOrder
   blockchain?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  watchlistId?: Prisma.SortOrder
 }
 
 export type WalletMaxOrderByAggregateInput = {
@@ -338,7 +323,6 @@ export type WalletMaxOrderByAggregateInput = {
   nickname?: Prisma.SortOrder
   blockchain?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  watchlistId?: Prisma.SortOrder
 }
 
 export type WalletMinOrderByAggregateInput = {
@@ -348,7 +332,6 @@ export type WalletMinOrderByAggregateInput = {
   nickname?: Prisma.SortOrder
   blockchain?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  watchlistId?: Prisma.SortOrder
 }
 
 export type WalletListRelationFilter = {
@@ -365,49 +348,45 @@ export type EnumBlockchainFieldUpdateOperationsInput = {
   set?: $Enums.Blockchain
 }
 
-export type WalletCreateNestedManyWithoutWatchlistInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistInput, Prisma.WalletUncheckedCreateWithoutWatchlistInput> | Prisma.WalletCreateWithoutWatchlistInput[] | Prisma.WalletUncheckedCreateWithoutWatchlistInput[]
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutWatchlistInput | Prisma.WalletCreateOrConnectWithoutWatchlistInput[]
-  createMany?: Prisma.WalletCreateManyWatchlistInputEnvelope
+export type WalletCreateNestedManyWithoutWatchlistsInput = {
+  create?: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistsInput, Prisma.WalletUncheckedCreateWithoutWatchlistsInput> | Prisma.WalletCreateWithoutWatchlistsInput[] | Prisma.WalletUncheckedCreateWithoutWatchlistsInput[]
+  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutWatchlistsInput | Prisma.WalletCreateOrConnectWithoutWatchlistsInput[]
   connect?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
 }
 
-export type WalletUncheckedCreateNestedManyWithoutWatchlistInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistInput, Prisma.WalletUncheckedCreateWithoutWatchlistInput> | Prisma.WalletCreateWithoutWatchlistInput[] | Prisma.WalletUncheckedCreateWithoutWatchlistInput[]
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutWatchlistInput | Prisma.WalletCreateOrConnectWithoutWatchlistInput[]
-  createMany?: Prisma.WalletCreateManyWatchlistInputEnvelope
+export type WalletUncheckedCreateNestedManyWithoutWatchlistsInput = {
+  create?: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistsInput, Prisma.WalletUncheckedCreateWithoutWatchlistsInput> | Prisma.WalletCreateWithoutWatchlistsInput[] | Prisma.WalletUncheckedCreateWithoutWatchlistsInput[]
+  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutWatchlistsInput | Prisma.WalletCreateOrConnectWithoutWatchlistsInput[]
   connect?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
 }
 
-export type WalletUpdateManyWithoutWatchlistNestedInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistInput, Prisma.WalletUncheckedCreateWithoutWatchlistInput> | Prisma.WalletCreateWithoutWatchlistInput[] | Prisma.WalletUncheckedCreateWithoutWatchlistInput[]
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutWatchlistInput | Prisma.WalletCreateOrConnectWithoutWatchlistInput[]
-  upsert?: Prisma.WalletUpsertWithWhereUniqueWithoutWatchlistInput | Prisma.WalletUpsertWithWhereUniqueWithoutWatchlistInput[]
-  createMany?: Prisma.WalletCreateManyWatchlistInputEnvelope
+export type WalletUpdateManyWithoutWatchlistsNestedInput = {
+  create?: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistsInput, Prisma.WalletUncheckedCreateWithoutWatchlistsInput> | Prisma.WalletCreateWithoutWatchlistsInput[] | Prisma.WalletUncheckedCreateWithoutWatchlistsInput[]
+  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutWatchlistsInput | Prisma.WalletCreateOrConnectWithoutWatchlistsInput[]
+  upsert?: Prisma.WalletUpsertWithWhereUniqueWithoutWatchlistsInput | Prisma.WalletUpsertWithWhereUniqueWithoutWatchlistsInput[]
   set?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
   disconnect?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
   delete?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
   connect?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
-  update?: Prisma.WalletUpdateWithWhereUniqueWithoutWatchlistInput | Prisma.WalletUpdateWithWhereUniqueWithoutWatchlistInput[]
-  updateMany?: Prisma.WalletUpdateManyWithWhereWithoutWatchlistInput | Prisma.WalletUpdateManyWithWhereWithoutWatchlistInput[]
+  update?: Prisma.WalletUpdateWithWhereUniqueWithoutWatchlistsInput | Prisma.WalletUpdateWithWhereUniqueWithoutWatchlistsInput[]
+  updateMany?: Prisma.WalletUpdateManyWithWhereWithoutWatchlistsInput | Prisma.WalletUpdateManyWithWhereWithoutWatchlistsInput[]
   deleteMany?: Prisma.WalletScalarWhereInput | Prisma.WalletScalarWhereInput[]
 }
 
-export type WalletUncheckedUpdateManyWithoutWatchlistNestedInput = {
-  create?: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistInput, Prisma.WalletUncheckedCreateWithoutWatchlistInput> | Prisma.WalletCreateWithoutWatchlistInput[] | Prisma.WalletUncheckedCreateWithoutWatchlistInput[]
-  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutWatchlistInput | Prisma.WalletCreateOrConnectWithoutWatchlistInput[]
-  upsert?: Prisma.WalletUpsertWithWhereUniqueWithoutWatchlistInput | Prisma.WalletUpsertWithWhereUniqueWithoutWatchlistInput[]
-  createMany?: Prisma.WalletCreateManyWatchlistInputEnvelope
+export type WalletUncheckedUpdateManyWithoutWatchlistsNestedInput = {
+  create?: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistsInput, Prisma.WalletUncheckedCreateWithoutWatchlistsInput> | Prisma.WalletCreateWithoutWatchlistsInput[] | Prisma.WalletUncheckedCreateWithoutWatchlistsInput[]
+  connectOrCreate?: Prisma.WalletCreateOrConnectWithoutWatchlistsInput | Prisma.WalletCreateOrConnectWithoutWatchlistsInput[]
+  upsert?: Prisma.WalletUpsertWithWhereUniqueWithoutWatchlistsInput | Prisma.WalletUpsertWithWhereUniqueWithoutWatchlistsInput[]
   set?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
   disconnect?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
   delete?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
   connect?: Prisma.WalletWhereUniqueInput | Prisma.WalletWhereUniqueInput[]
-  update?: Prisma.WalletUpdateWithWhereUniqueWithoutWatchlistInput | Prisma.WalletUpdateWithWhereUniqueWithoutWatchlistInput[]
-  updateMany?: Prisma.WalletUpdateManyWithWhereWithoutWatchlistInput | Prisma.WalletUpdateManyWithWhereWithoutWatchlistInput[]
+  update?: Prisma.WalletUpdateWithWhereUniqueWithoutWatchlistsInput | Prisma.WalletUpdateWithWhereUniqueWithoutWatchlistsInput[]
+  updateMany?: Prisma.WalletUpdateManyWithWhereWithoutWatchlistsInput | Prisma.WalletUpdateManyWithWhereWithoutWatchlistsInput[]
   deleteMany?: Prisma.WalletScalarWhereInput | Prisma.WalletScalarWhereInput[]
 }
 
-export type WalletCreateWithoutWatchlistInput = {
+export type WalletCreateWithoutWatchlistsInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -416,7 +395,7 @@ export type WalletCreateWithoutWatchlistInput = {
   address: string
 }
 
-export type WalletUncheckedCreateWithoutWatchlistInput = {
+export type WalletUncheckedCreateWithoutWatchlistsInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -425,30 +404,25 @@ export type WalletUncheckedCreateWithoutWatchlistInput = {
   address: string
 }
 
-export type WalletCreateOrConnectWithoutWatchlistInput = {
+export type WalletCreateOrConnectWithoutWatchlistsInput = {
   where: Prisma.WalletWhereUniqueInput
-  create: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistInput, Prisma.WalletUncheckedCreateWithoutWatchlistInput>
+  create: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistsInput, Prisma.WalletUncheckedCreateWithoutWatchlistsInput>
 }
 
-export type WalletCreateManyWatchlistInputEnvelope = {
-  data: Prisma.WalletCreateManyWatchlistInput | Prisma.WalletCreateManyWatchlistInput[]
-  skipDuplicates?: boolean
-}
-
-export type WalletUpsertWithWhereUniqueWithoutWatchlistInput = {
+export type WalletUpsertWithWhereUniqueWithoutWatchlistsInput = {
   where: Prisma.WalletWhereUniqueInput
-  update: Prisma.XOR<Prisma.WalletUpdateWithoutWatchlistInput, Prisma.WalletUncheckedUpdateWithoutWatchlistInput>
-  create: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistInput, Prisma.WalletUncheckedCreateWithoutWatchlistInput>
+  update: Prisma.XOR<Prisma.WalletUpdateWithoutWatchlistsInput, Prisma.WalletUncheckedUpdateWithoutWatchlistsInput>
+  create: Prisma.XOR<Prisma.WalletCreateWithoutWatchlistsInput, Prisma.WalletUncheckedCreateWithoutWatchlistsInput>
 }
 
-export type WalletUpdateWithWhereUniqueWithoutWatchlistInput = {
+export type WalletUpdateWithWhereUniqueWithoutWatchlistsInput = {
   where: Prisma.WalletWhereUniqueInput
-  data: Prisma.XOR<Prisma.WalletUpdateWithoutWatchlistInput, Prisma.WalletUncheckedUpdateWithoutWatchlistInput>
+  data: Prisma.XOR<Prisma.WalletUpdateWithoutWatchlistsInput, Prisma.WalletUncheckedUpdateWithoutWatchlistsInput>
 }
 
-export type WalletUpdateManyWithWhereWithoutWatchlistInput = {
+export type WalletUpdateManyWithWhereWithoutWatchlistsInput = {
   where: Prisma.WalletScalarWhereInput
-  data: Prisma.XOR<Prisma.WalletUpdateManyMutationInput, Prisma.WalletUncheckedUpdateManyWithoutWatchlistInput>
+  data: Prisma.XOR<Prisma.WalletUpdateManyMutationInput, Prisma.WalletUncheckedUpdateManyWithoutWatchlistsInput>
 }
 
 export type WalletScalarWhereInput = {
@@ -461,19 +435,9 @@ export type WalletScalarWhereInput = {
   nickname?: Prisma.StringFilter<"Wallet"> | string
   blockchain?: Prisma.EnumBlockchainFilter<"Wallet"> | $Enums.Blockchain
   address?: Prisma.StringFilter<"Wallet"> | string
-  watchlistId?: Prisma.StringFilter<"Wallet"> | string
 }
 
-export type WalletCreateManyWatchlistInput = {
-  id?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  nickname?: string
-  blockchain?: $Enums.Blockchain
-  address: string
-}
-
-export type WalletUpdateWithoutWatchlistInput = {
+export type WalletUpdateWithoutWatchlistsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -482,7 +446,7 @@ export type WalletUpdateWithoutWatchlistInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type WalletUncheckedUpdateWithoutWatchlistInput = {
+export type WalletUncheckedUpdateWithoutWatchlistsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -491,7 +455,7 @@ export type WalletUncheckedUpdateWithoutWatchlistInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type WalletUncheckedUpdateManyWithoutWatchlistInput = {
+export type WalletUncheckedUpdateManyWithoutWatchlistsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -500,6 +464,35 @@ export type WalletUncheckedUpdateManyWithoutWatchlistInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
+
+/**
+ * Count Type WalletCountOutputType
+ */
+
+export type WalletCountOutputType = {
+  watchlists: number
+}
+
+export type WalletCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  watchlists?: boolean | WalletCountOutputTypeCountWatchlistsArgs
+}
+
+/**
+ * WalletCountOutputType without action
+ */
+export type WalletCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WalletCountOutputType
+   */
+  select?: Prisma.WalletCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * WalletCountOutputType without action
+ */
+export type WalletCountOutputTypeCountWatchlistsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WatchlistWhereInput
+}
 
 
 export type WalletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -509,8 +502,8 @@ export type WalletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   nickname?: boolean
   blockchain?: boolean
   address?: boolean
-  watchlistId?: boolean
-  watchlist?: boolean | Prisma.WatchlistDefaultArgs<ExtArgs>
+  watchlists?: boolean | Prisma.Wallet$watchlistsArgs<ExtArgs>
+  _count?: boolean | Prisma.WalletCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["wallet"]>
 
 export type WalletSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -520,8 +513,6 @@ export type WalletSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   nickname?: boolean
   blockchain?: boolean
   address?: boolean
-  watchlistId?: boolean
-  watchlist?: boolean | Prisma.WatchlistDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["wallet"]>
 
 export type WalletSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -531,8 +522,6 @@ export type WalletSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   nickname?: boolean
   blockchain?: boolean
   address?: boolean
-  watchlistId?: boolean
-  watchlist?: boolean | Prisma.WatchlistDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["wallet"]>
 
 export type WalletSelectScalar = {
@@ -542,24 +531,20 @@ export type WalletSelectScalar = {
   nickname?: boolean
   blockchain?: boolean
   address?: boolean
-  watchlistId?: boolean
 }
 
-export type WalletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "nickname" | "blockchain" | "address" | "watchlistId", ExtArgs["result"]["wallet"]>
+export type WalletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "nickname" | "blockchain" | "address", ExtArgs["result"]["wallet"]>
 export type WalletInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  watchlist?: boolean | Prisma.WatchlistDefaultArgs<ExtArgs>
+  watchlists?: boolean | Prisma.Wallet$watchlistsArgs<ExtArgs>
+  _count?: boolean | Prisma.WalletCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type WalletIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  watchlist?: boolean | Prisma.WatchlistDefaultArgs<ExtArgs>
-}
-export type WalletIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  watchlist?: boolean | Prisma.WatchlistDefaultArgs<ExtArgs>
-}
+export type WalletIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type WalletIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $WalletPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Wallet"
   objects: {
-    watchlist: Prisma.$WatchlistPayload<ExtArgs>
+    watchlists: Prisma.$WatchlistPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -568,7 +553,6 @@ export type $WalletPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     nickname: string
     blockchain: $Enums.Blockchain
     address: string
-    watchlistId: string
   }, ExtArgs["result"]["wallet"]>
   composites: {}
 }
@@ -963,7 +947,7 @@ readonly fields: WalletFieldRefs;
  */
 export interface Prisma__WalletClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  watchlist<T extends Prisma.WatchlistDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WatchlistDefaultArgs<ExtArgs>>): Prisma.Prisma__WatchlistClient<runtime.Types.Result.GetResult<Prisma.$WatchlistPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  watchlists<T extends Prisma.Wallet$watchlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Wallet$watchlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WatchlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -999,7 +983,6 @@ export interface WalletFieldRefs {
   readonly nickname: Prisma.FieldRef<"Wallet", 'String'>
   readonly blockchain: Prisma.FieldRef<"Wallet", 'Blockchain'>
   readonly address: Prisma.FieldRef<"Wallet", 'String'>
-  readonly watchlistId: Prisma.FieldRef<"Wallet", 'String'>
 }
     
 
@@ -1254,10 +1237,6 @@ export type WalletCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.WalletCreateManyInput | Prisma.WalletCreateManyInput[]
   skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1328,10 +1307,6 @@ export type WalletUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Wallets to update.
    */
   limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.WalletIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1398,6 +1373,30 @@ export type WalletDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many Wallets to delete.
    */
   limit?: number
+}
+
+/**
+ * Wallet.watchlists
+ */
+export type Wallet$watchlistsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Watchlist
+   */
+  select?: Prisma.WatchlistSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Watchlist
+   */
+  omit?: Prisma.WatchlistOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WatchlistInclude<ExtArgs> | null
+  where?: Prisma.WatchlistWhereInput
+  orderBy?: Prisma.WatchlistOrderByWithRelationInput | Prisma.WatchlistOrderByWithRelationInput[]
+  cursor?: Prisma.WatchlistWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WatchlistScalarFieldEnum | Prisma.WatchlistScalarFieldEnum[]
 }
 
 /**

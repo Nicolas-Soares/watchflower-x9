@@ -236,7 +236,7 @@ export type WatchlistCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name: string
-  wallets?: Prisma.WalletCreateNestedManyWithoutWatchlistInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutWatchlistsInput
   user: Prisma.UserCreateNestedOneWithoutWatchlistsInput
 }
 
@@ -246,7 +246,7 @@ export type WatchlistUncheckedCreateInput = {
   updatedAt?: Date | string
   name: string
   userId: string
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutWatchlistInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutWatchlistsInput
 }
 
 export type WatchlistUpdateInput = {
@@ -254,7 +254,7 @@ export type WatchlistUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  wallets?: Prisma.WalletUpdateManyWithoutWatchlistNestedInput
+  wallets?: Prisma.WalletUpdateManyWithoutWatchlistsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutWatchlistsNestedInput
 }
 
@@ -264,7 +264,7 @@ export type WatchlistUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutWatchlistNestedInput
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutWatchlistsNestedInput
 }
 
 export type WatchlistCreateManyInput = {
@@ -298,11 +298,6 @@ export type WatchlistListRelationFilter = {
 
 export type WatchlistOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type WatchlistScalarRelationFilter = {
-  is?: Prisma.WatchlistWhereInput
-  isNot?: Prisma.WatchlistWhereInput
 }
 
 export type WatchlistCountOrderByAggregateInput = {
@@ -371,18 +366,42 @@ export type WatchlistUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.WatchlistScalarWhereInput | Prisma.WatchlistScalarWhereInput[]
 }
 
-export type WatchlistCreateNestedOneWithoutWalletsInput = {
-  create?: Prisma.XOR<Prisma.WatchlistCreateWithoutWalletsInput, Prisma.WatchlistUncheckedCreateWithoutWalletsInput>
-  connectOrCreate?: Prisma.WatchlistCreateOrConnectWithoutWalletsInput
-  connect?: Prisma.WatchlistWhereUniqueInput
+export type WatchlistCreateNestedManyWithoutWalletsInput = {
+  create?: Prisma.XOR<Prisma.WatchlistCreateWithoutWalletsInput, Prisma.WatchlistUncheckedCreateWithoutWalletsInput> | Prisma.WatchlistCreateWithoutWalletsInput[] | Prisma.WatchlistUncheckedCreateWithoutWalletsInput[]
+  connectOrCreate?: Prisma.WatchlistCreateOrConnectWithoutWalletsInput | Prisma.WatchlistCreateOrConnectWithoutWalletsInput[]
+  connect?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
 }
 
-export type WatchlistUpdateOneRequiredWithoutWalletsNestedInput = {
-  create?: Prisma.XOR<Prisma.WatchlistCreateWithoutWalletsInput, Prisma.WatchlistUncheckedCreateWithoutWalletsInput>
-  connectOrCreate?: Prisma.WatchlistCreateOrConnectWithoutWalletsInput
-  upsert?: Prisma.WatchlistUpsertWithoutWalletsInput
-  connect?: Prisma.WatchlistWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WatchlistUpdateToOneWithWhereWithoutWalletsInput, Prisma.WatchlistUpdateWithoutWalletsInput>, Prisma.WatchlistUncheckedUpdateWithoutWalletsInput>
+export type WatchlistUncheckedCreateNestedManyWithoutWalletsInput = {
+  create?: Prisma.XOR<Prisma.WatchlistCreateWithoutWalletsInput, Prisma.WatchlistUncheckedCreateWithoutWalletsInput> | Prisma.WatchlistCreateWithoutWalletsInput[] | Prisma.WatchlistUncheckedCreateWithoutWalletsInput[]
+  connectOrCreate?: Prisma.WatchlistCreateOrConnectWithoutWalletsInput | Prisma.WatchlistCreateOrConnectWithoutWalletsInput[]
+  connect?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+}
+
+export type WatchlistUpdateManyWithoutWalletsNestedInput = {
+  create?: Prisma.XOR<Prisma.WatchlistCreateWithoutWalletsInput, Prisma.WatchlistUncheckedCreateWithoutWalletsInput> | Prisma.WatchlistCreateWithoutWalletsInput[] | Prisma.WatchlistUncheckedCreateWithoutWalletsInput[]
+  connectOrCreate?: Prisma.WatchlistCreateOrConnectWithoutWalletsInput | Prisma.WatchlistCreateOrConnectWithoutWalletsInput[]
+  upsert?: Prisma.WatchlistUpsertWithWhereUniqueWithoutWalletsInput | Prisma.WatchlistUpsertWithWhereUniqueWithoutWalletsInput[]
+  set?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+  disconnect?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+  delete?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+  connect?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+  update?: Prisma.WatchlistUpdateWithWhereUniqueWithoutWalletsInput | Prisma.WatchlistUpdateWithWhereUniqueWithoutWalletsInput[]
+  updateMany?: Prisma.WatchlistUpdateManyWithWhereWithoutWalletsInput | Prisma.WatchlistUpdateManyWithWhereWithoutWalletsInput[]
+  deleteMany?: Prisma.WatchlistScalarWhereInput | Prisma.WatchlistScalarWhereInput[]
+}
+
+export type WatchlistUncheckedUpdateManyWithoutWalletsNestedInput = {
+  create?: Prisma.XOR<Prisma.WatchlistCreateWithoutWalletsInput, Prisma.WatchlistUncheckedCreateWithoutWalletsInput> | Prisma.WatchlistCreateWithoutWalletsInput[] | Prisma.WatchlistUncheckedCreateWithoutWalletsInput[]
+  connectOrCreate?: Prisma.WatchlistCreateOrConnectWithoutWalletsInput | Prisma.WatchlistCreateOrConnectWithoutWalletsInput[]
+  upsert?: Prisma.WatchlistUpsertWithWhereUniqueWithoutWalletsInput | Prisma.WatchlistUpsertWithWhereUniqueWithoutWalletsInput[]
+  set?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+  disconnect?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+  delete?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+  connect?: Prisma.WatchlistWhereUniqueInput | Prisma.WatchlistWhereUniqueInput[]
+  update?: Prisma.WatchlistUpdateWithWhereUniqueWithoutWalletsInput | Prisma.WatchlistUpdateWithWhereUniqueWithoutWalletsInput[]
+  updateMany?: Prisma.WatchlistUpdateManyWithWhereWithoutWalletsInput | Prisma.WatchlistUpdateManyWithWhereWithoutWalletsInput[]
+  deleteMany?: Prisma.WatchlistScalarWhereInput | Prisma.WatchlistScalarWhereInput[]
 }
 
 export type WatchlistCreateWithoutUserInput = {
@@ -390,7 +409,7 @@ export type WatchlistCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name: string
-  wallets?: Prisma.WalletCreateNestedManyWithoutWatchlistInput
+  wallets?: Prisma.WalletCreateNestedManyWithoutWatchlistsInput
 }
 
 export type WatchlistUncheckedCreateWithoutUserInput = {
@@ -398,7 +417,7 @@ export type WatchlistUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   name: string
-  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutWatchlistInput
+  wallets?: Prisma.WalletUncheckedCreateNestedManyWithoutWatchlistsInput
 }
 
 export type WatchlistCreateOrConnectWithoutUserInput = {
@@ -459,15 +478,50 @@ export type WatchlistCreateOrConnectWithoutWalletsInput = {
   create: Prisma.XOR<Prisma.WatchlistCreateWithoutWalletsInput, Prisma.WatchlistUncheckedCreateWithoutWalletsInput>
 }
 
-export type WatchlistUpsertWithoutWalletsInput = {
+export type WatchlistUpsertWithWhereUniqueWithoutWalletsInput = {
+  where: Prisma.WatchlistWhereUniqueInput
   update: Prisma.XOR<Prisma.WatchlistUpdateWithoutWalletsInput, Prisma.WatchlistUncheckedUpdateWithoutWalletsInput>
   create: Prisma.XOR<Prisma.WatchlistCreateWithoutWalletsInput, Prisma.WatchlistUncheckedCreateWithoutWalletsInput>
-  where?: Prisma.WatchlistWhereInput
 }
 
-export type WatchlistUpdateToOneWithWhereWithoutWalletsInput = {
-  where?: Prisma.WatchlistWhereInput
+export type WatchlistUpdateWithWhereUniqueWithoutWalletsInput = {
+  where: Prisma.WatchlistWhereUniqueInput
   data: Prisma.XOR<Prisma.WatchlistUpdateWithoutWalletsInput, Prisma.WatchlistUncheckedUpdateWithoutWalletsInput>
+}
+
+export type WatchlistUpdateManyWithWhereWithoutWalletsInput = {
+  where: Prisma.WatchlistScalarWhereInput
+  data: Prisma.XOR<Prisma.WatchlistUpdateManyMutationInput, Prisma.WatchlistUncheckedUpdateManyWithoutWalletsInput>
+}
+
+export type WatchlistCreateManyUserInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  name: string
+}
+
+export type WatchlistUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  wallets?: Prisma.WalletUpdateManyWithoutWatchlistsNestedInput
+}
+
+export type WatchlistUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  wallets?: Prisma.WalletUncheckedUpdateManyWithoutWatchlistsNestedInput
+}
+
+export type WatchlistUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type WatchlistUpdateWithoutWalletsInput = {
@@ -486,34 +540,12 @@ export type WatchlistUncheckedUpdateWithoutWalletsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type WatchlistCreateManyUserInput = {
-  id?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  name: string
-}
-
-export type WatchlistUpdateWithoutUserInput = {
+export type WatchlistUncheckedUpdateManyWithoutWalletsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  wallets?: Prisma.WalletUpdateManyWithoutWatchlistNestedInput
-}
-
-export type WatchlistUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  wallets?: Prisma.WalletUncheckedUpdateManyWithoutWatchlistNestedInput
-}
-
-export type WatchlistUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 

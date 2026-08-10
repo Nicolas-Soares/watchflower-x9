@@ -38,8 +38,7 @@ model Wallet {
   blockchain  Blockchain  @default(UNKNOWN)
   address     String      @unique
 
-  watchlistId String
-  watchlist   Watchlist   @relation(fields: [watchlistId], references: [id], onDelete: Cascade)
+  watchlists  Watchlist[]
 }
 
 model Watchlist {
