@@ -34,7 +34,7 @@ export default async function (): Promise<void> {
   })
 
   const editOption = await io.select({
-    message: `=== Edit ${watchlist?.name} ===`,
+    message: `=== Edit options ===`,
     choices: [
       { name: 'Change name', value: 'change-name' },
       { name: 'Add wallet', value: 'add-wallet' },
@@ -45,17 +45,17 @@ export default async function (): Promise<void> {
 
   switch (editOption) {
     case 'change-name':
-      const newWatchlistName = await io.input({ message: 'Enter watchlist name: ' })
+      const newWatchlistName = await io.input({ message: 'Enter watchlist name:' })
 
       await prisma.watchlist.update({
         where: { id: watchlistId },
         data: { name: newWatchlistName }
       })
 
-      io.print(`Watchlist ${watchlist?.name} updated to ${newWatchlistName}`)
+      io.print(`Changed ${watchlist?.name} to --> ${newWatchlistName}`)
       break
     case 'add-wallet':
-      const walletAddrs = await io.input({ message: 'Enter wallet address: ' })
+      const walletAddrs = await io.input({ message: 'Enter wallet address:' })
 
       await prisma.watchlist.update({
         where: { id: watchlistId },
@@ -69,7 +69,7 @@ export default async function (): Promise<void> {
         }
       })
 
-      io.print(`Wallet ${walletAddrs} added to watchlist ${watchlist?.name}`)
+      io.print(`Address ${walletAddrs} added to ${watchlist?.name}`)
       break
     case 'remove-wallet':
       if (!watchlist?.wallets.length) {
@@ -93,7 +93,7 @@ export default async function (): Promise<void> {
         }
       })
 
-      io.print(`Wallet removed from watchlist ${watchlist?.name}`)
+      io.print(`Address removed from ${watchlist?.name}`)
       break
     case 'return':
       return

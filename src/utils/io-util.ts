@@ -45,10 +45,12 @@ async function input(
   { message, validation = true }:
   { message: string, validation?: boolean }
 ) {
-  return await promptInput({
+  const value = await promptInput({
     message,
     ...(validation && { validate: (value) => value.trim() !== '' || 'Input cannot be empty' })
   })
+  
+  return value.trim()
 }
 
 async function pressEnterToContinue(): Promise<void> {

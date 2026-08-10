@@ -13,7 +13,7 @@ export async function createNewUser(): Promise<User> {
 
   io.printAppTitle()
   io.print('=== Create a new user ===')
-  username = await io.input({ message: 'Username: ' })
+  username = await io.input({ message: 'Username:' })
 
   const user = await prisma.user.create({ data: { username } })
 
