@@ -28,7 +28,10 @@ export default async function (): Promise<void> {
     ]
   })
 
-  const watchlist = await prisma.watchlist.findUnique({ where: { id: watchlistId } })
+  const watchlist = await prisma.watchlist.findUnique({
+    where: { id: watchlistId },
+    include: { wallets: true }
+  })
 
   const editOption = await io.select({
     message: `=== Edit ${watchlist?.name} ===`,
@@ -66,8 +69,31 @@ export default async function (): Promise<void> {
         }
       })
 
+      io.print(`Wallet ${walletAddrs} added to watchlist ${watchlist?.name}`)
       break
     case 'remove-wallet':
+      if (!watchlist?.wallets.length) {
+        io.print('No wallets found in this watchlist.')
+        break
+      }
+
+      const walletToDelete = await io.select({
+        message: `=== Choose a wallet to remove from ${watchlist?.name} ===`,
+        choices: [
+          ...watchlist?.wallets.map(wallet => ({ name: wallet.address, value: wallet.id }))
+        ]
+      })
+
+      await prisma.watchlist.update({
+        where: { id: watchlistId },
+        data: {
+          wallets: {
+            disconnect: { id: walletToDelete }
+          }
+        }
+      })
+
+      io.print(`Wallet removed from watchlist ${watchlist?.name}`)
       break
     case 'return':
       return
