@@ -55,6 +55,16 @@ export default async function (): Promise<void> {
       io.print(`Changed ${watchlist?.name} to --> ${newWatchlistName}`)
       break
     case 'add-wallet':
+      const watchlistWallets = await prisma.wallet.findMany({
+        where: {
+          watchlists: {
+            some: { id: watchlistId }
+          }
+        },
+      })
+
+      io.print(`${watchlistWallets.map(w => w.address).join('\n')}`)
+
       const walletAddrs = await io.input({ message: 'Enter wallet address:' })
 
       await prisma.watchlist.update({
