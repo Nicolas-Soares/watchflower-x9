@@ -33,13 +33,27 @@ export default async function (): Promise<void> {
     include: { wallets: true }
   })
 
+  const watchlistWallets = await prisma.wallet.findMany({
+    where: {
+      watchlists: {
+        some: { id: watchlistId }
+      }
+    },
+  })
+
+  const walletsFormattedDataToPrint = `${watchlistWallets.map(w => `${w.blockchain} | ${w.nickname} | ${w.address}`).join('\n')}`
+
+  io.print('CHAIN | WALLET | ADDRESS\n')
+  io.print(walletsFormattedDataToPrint)
+
   const editOption = await io.select({
     message: `=== Edit options ===`,
     choices: [
-      { name: 'Change name', value: 'change-name' },
-      { name: 'Add wallet', value: 'add-wallet' },
-      { name: 'Remove wallet', value: 'remove-wallet' },
-      { name: 'Return to previous menu', value: 'return' }
+      { name: '[#] Change watchlist name', value: 'change-name' },
+      { name: '[+] Add wallet', value: 'add-wallet' },
+      { name: '[#] Edit wallet', value: 'edit-wallet' },
+      { name: '[-] Remove wallet', value: 'remove-wallet' },
+      { name: '<< Return to previous menu', value: 'return' }
     ]
   })
 
@@ -55,16 +69,6 @@ export default async function (): Promise<void> {
       io.print(`Changed ${watchlist?.name} to --> ${newWatchlistName}`)
       break
     case 'add-wallet':
-      const watchlistWallets = await prisma.wallet.findMany({
-        where: {
-          watchlists: {
-            some: { id: watchlistId }
-          }
-        },
-      })
-
-      io.print(`${watchlistWallets.map(w => `[${w.nickname}] ${w.address}`).join('\n')}`)
-
       const walletAddrs = await io.input({ message: 'Enter wallet address:' })
       const walletNickname = await io.input({
         message: 'Enter wallet nickname (or don\'t):',
@@ -88,6 +92,34 @@ export default async function (): Promise<void> {
 
       io.print(`Address ${walletAddrs} added to ${watchlist?.name}`)
       break
+    case 'edit-wallet':
+      io.printAppTitle()
+
+      const walletSelection = await io.select({
+        message: '=== Select a wallet to edit ===',
+        choices: [
+          ...watchlistWallets.map(w => ({ name: `${w.blockchain} | ${w.nickname} | ${w.address}`, value: w.id }))
+        ]
+      })
+
+      const editSelection = await io.select({
+        message: '=== What do you want to edit? ===',
+        choices: [
+          { name: 'Chain', value: 'blockchain' },
+          { name: 'Nickname', value: 'nickname' },
+          { name: 'Address', value: 'address' },
+        ]
+      })
+
+      const value = await io.input({ message: `Enter new ${editSelection}` })
+
+      await prisma.wallet.update({
+        where: { id: walletSelection },
+        data: { [editSelection]: value }
+      })
+
+      io.print(`Value of ${editSelection} updated successfully!`)
+      break
     case 'remove-wallet':
       if (!watchlist?.wallets.length) {
         io.print('No wallets found in this watchlist.')
@@ -97,7 +129,7 @@ export default async function (): Promise<void> {
       const walletToDelete = await io.select({
         message: `=== Choose a wallet to remove from ${watchlist?.name} ===`,
         choices: [
-          ...watchlist?.wallets.map(wallet => ({ name: `[${wallet.nickname}] ${wallet.address}`, value: wallet.id }))
+          ...watchlist?.wallets.map(w => ({ name: `${w.nickname} | ${w.address}`, value: w.id }))
         ]
       })
 
