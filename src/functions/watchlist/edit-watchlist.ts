@@ -63,9 +63,13 @@ export default async function (): Promise<void> {
         },
       })
 
-      io.print(`${watchlistWallets.map(w => w.address).join('\n')}`)
+      io.print(`${watchlistWallets.map(w => `[${w.nickname}] ${w.address}`).join('\n')}`)
 
       const walletAddrs = await io.input({ message: 'Enter wallet address:' })
+      const walletNickname = await io.input({
+        message: 'Enter wallet nickname (or don\'t):',
+        validation: false
+      })
 
       await prisma.watchlist.update({
         where: { id: watchlistId },
@@ -73,7 +77,10 @@ export default async function (): Promise<void> {
           wallets: {
             connectOrCreate: {
               where: { address: walletAddrs },
-              create: { address: walletAddrs }
+              create: {
+                address: walletAddrs,
+                ...(walletNickname && { nickname: walletNickname })
+              }
             }
           }
         }
@@ -90,7 +97,7 @@ export default async function (): Promise<void> {
       const walletToDelete = await io.select({
         message: `=== Choose a wallet to remove from ${watchlist?.name} ===`,
         choices: [
-          ...watchlist?.wallets.map(wallet => ({ name: wallet.address, value: wallet.id }))
+          ...watchlist?.wallets.map(wallet => ({ name: `[${wallet.nickname}] ${wallet.address}`, value: wallet.id }))
         ]
       })
 
