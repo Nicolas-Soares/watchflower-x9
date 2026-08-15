@@ -1,8 +1,8 @@
 // CLIENTS
-import { prisma } from '../clients/prisma.js'
+import { prisma } from '../../clients/prisma.js'
 
 // UTILS
-import io from '../utils/io-util.js'
+import io from '../../utils/io-util.js'
 
 export async function deleteUser(): Promise<void> {
   io.printAppTitle()

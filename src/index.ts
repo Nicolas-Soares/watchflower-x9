@@ -11,9 +11,9 @@ import { treatError } from './utils/treat-error-util.js'
 import io from './utils/io-util.js'
 
 // FUNCTIONS
-import { manageWalletWatchlists } from './functions/manage-wallet-watchlists.js'
+import { manageWalletWatchlists } from './functions/watchlist/manage-wallet-watchlists.js'
 import { getWalletBalance } from './services/get-wallet-balance.js'
-import { login } from './functions/login.js'
+import { login } from './functions/user/login.js'
 
 // TYPES
 import type { User } from './shared/types/user.js'

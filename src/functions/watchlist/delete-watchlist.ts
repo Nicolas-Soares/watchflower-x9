@@ -1,11 +1,11 @@
 // CLIENTS
-import { prisma } from '../clients/prisma.js'
+import { prisma } from '../../clients/prisma.js'
 
 // UTILS
-import io from '../utils/io-util.js'
+import io from '../../utils/io-util.js'
 
 // GLOBALS
-import { ACTIVE_USER } from '../shared/active-user.js'
+import { ACTIVE_USER } from '../../shared/active-user.js'
 
 export default async function (): Promise<void> {
   io.printAppTitle()

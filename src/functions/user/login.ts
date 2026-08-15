@@ -1,16 +1,16 @@
 // CLIENTS
-import { prisma } from '../clients/prisma.js'
+import { prisma } from '../../clients/prisma.js'
 
 // UTILS
-import { logger } from '../utils/logger-util.js'
-import io from '../utils/io-util.js'
+import { logger } from '../../utils/logger-util.js'
+import io from '../../utils/io-util.js'
 
 // FUNCTIONS
 import { createNewUser } from './create-new-user.js'
 import { deleteUser } from './delete-user.js'
 
 // TYPES
-import type { User } from '../shared/types/user.js'
+import type { User } from '../../shared/types/user.js'
 
 export async function login(): Promise<User> {
   io.printAppTitle()
@@ -31,10 +31,12 @@ export async function login(): Promise<User> {
       ]
     })
   
-    if (userSelection == 'create-new-user') return await createNewUser()
-    if (userSelection == 'delete-user') {
-      await deleteUser()
-      return await login()
+    switch (userSelection) {
+      case 'create-new-user': return await createNewUser()
+      // case 'edit-user': return await editUser()
+      case 'delete-user':
+        await deleteUser()
+        return await login()
     }
   
     const user = users.find(u => u.id === userSelection)

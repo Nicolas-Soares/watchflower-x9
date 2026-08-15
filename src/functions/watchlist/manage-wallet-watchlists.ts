@@ -1,5 +1,5 @@
 // UTILS
-import io from '../utils/io-util.js'
+import io from '../../utils/io-util.js'
 
 // FUNCTIONS
 import createWatchlist from './create-watchlist.js'

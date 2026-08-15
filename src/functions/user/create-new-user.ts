@@ -1,12 +1,12 @@
 // CLIENTS
-import { prisma } from '../clients/prisma.js'
+import { prisma } from '../../clients/prisma.js'
 
 // UTILS
-import { logger } from '../utils/logger-util.js'
-import io from '../utils/io-util.js'
+import { logger } from '../../utils/logger-util.js'
+import io from '../../utils/io-util.js'
 
 // TYPES
-import type { User } from '../shared/types/user.js'
+import type { User } from '../../shared/types/user.js'
 
 export async function createNewUser(): Promise<User> {
   let username: string = ''
