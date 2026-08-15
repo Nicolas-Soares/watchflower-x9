@@ -4,6 +4,9 @@ import { prisma } from '../../clients/prisma.js'
 // UTILS
 import io from '../../utils/io-util.js'
 
+// TYPES
+import { Blockchain } from '../../shared/types/blockchain.enum.js'
+
 // GLOBALS
 import { ACTIVE_USER } from '../../shared/active-user.js'
 
@@ -111,7 +114,16 @@ export default async function (): Promise<void> {
         ]
       })
 
-      const value = await io.input({ message: `Enter new ${editSelection}` })
+      let value
+
+      if (editSelection == 'blockchain') {
+        value = await io.select({
+          message: '=== Select a blockchain ===',
+          choices: Object.values(Blockchain).map(b => ({ name: b, value: b }))
+        })
+      } else {
+        value = await io.input({ message: `Enter new ${editSelection}` })
+      }
 
       await prisma.wallet.update({
         where: { id: walletSelection },
