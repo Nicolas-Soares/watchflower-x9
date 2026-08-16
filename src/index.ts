@@ -14,6 +14,7 @@ import io from './utils/io-util.js'
 import createWatchlist from './functions/watchlist/create-watchlist.js'
 import editWatchlist from './functions/watchlist/edit-watchlist.js'
 import deleteWatchlist from './functions/watchlist/delete-watchlist.js'
+import showWatchlist from './functions/watchlist/show-watchlist.js'
 import { getWalletBalance } from './services/get-wallet-balance.js'
 import { login } from './functions/user/login.js'
 
@@ -36,6 +37,7 @@ async function main() {
         choices: [
           { name: '[<>] Switch user', value: 'switch-user' },
           { name: '[$] Get wallet balance', value: 'balance' },
+          { name: '[*] Show watchlists', value: 'show-watchlist' },
           { name: '[+] Create new watchlist', value: 'create-watchlist' },
           { name: '[#] Edit existing watchlist', value: 'edit-watchlist' },
           { name: '[-] Delete watchlist', value: 'delete-watchlist' },
@@ -45,6 +47,7 @@ async function main() {
       
       switch (option) {
         case 'balance': await getWalletBalance({ client: baseClient }); break;
+        case 'show-watchlist': await showWatchlist();                   break;
         case 'create-watchlist': await createWatchlist();               break;
         case 'edit-watchlist': await editWatchlist();                   break;
         case 'delete-watchlist': await deleteWatchlist();               break;
