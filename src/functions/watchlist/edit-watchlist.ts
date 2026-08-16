@@ -73,10 +73,29 @@ export default async function (): Promise<void> {
       break
     case 'add-wallet':
       const walletAddrs = await io.input({ message: 'Enter wallet address:' })
+
       const walletNickname = await io.input({
         message: 'Enter wallet nickname (or don\'t):',
         validation: false
       })
+
+      const userWantsToSetBlockchain = await io.select({
+        message: 'Do you want to set a blockchain for this wallet?',
+        choices: [
+          { name: 'Yes', value: true },
+          { name: 'No', value: false },
+        ]
+      })
+
+
+      let walletBlockchain: null | Blockchain = null
+
+      if (userWantsToSetBlockchain) {
+        walletBlockchain = await io.select({
+          message: 'Chosse an available blockchain:',
+          choices: Object.values(Blockchain).map(b => ({ name: b, value: b }))
+        })
+      }
 
       await prisma.watchlist.update({
         where: { id: watchlistId },
@@ -86,7 +105,8 @@ export default async function (): Promise<void> {
               where: { address: walletAddrs },
               create: {
                 address: walletAddrs,
-                ...(walletNickname && { nickname: walletNickname })
+                ...(walletNickname && { nickname: walletNickname }),
+                ...(walletBlockchain && { blockchain: walletBlockchain })
               }
             }
           }

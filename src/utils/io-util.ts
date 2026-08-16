@@ -33,7 +33,7 @@ function dedent(text: string): string {
 
 async function select(
   { message, choices }:
-  { message: string, choices: { value: string, name: string }[] }
+  { message: string, choices: { value: any, name: string }[] }
 ) {
   return await promptSelect({
     message,
