@@ -3,6 +3,7 @@ import { prisma } from '../../clients/prisma.js'
 
 // UTILS
 import io from '../../utils/io-util.js'
+import { logger } from '../../utils/logger-util.js'
 
 // TYPES
 import { Blockchain } from '../../shared/types/blockchain.enum.js'
@@ -72,29 +73,39 @@ export default async function (): Promise<void> {
       io.print(`Changed ${watchlist?.name} to --> ${newWatchlistName}`)
       break
     case 'add-wallet':
+      let walletBlockchain: null | Blockchain = null
+      let walletNickname: null | string = null
+
       const walletAddrs = await io.input({ message: 'Enter wallet address:' })
 
-      const walletNickname = await io.input({
-        message: 'Enter wallet nickname (or don\'t):',
-        validation: false
+      const walletAlreadyExists = await prisma.wallet.findUnique({
+        where: { address: walletAddrs }
       })
 
-      const userWantsToSetBlockchain = await io.select({
-        message: 'Do you want to set a blockchain for this wallet?',
-        choices: [
-          { name: 'Yes', value: true },
-          { name: 'No', value: false },
-        ]
-      })
-
-
-      let walletBlockchain: null | Blockchain = null
-
-      if (userWantsToSetBlockchain) {
-        walletBlockchain = await io.select({
-          message: 'Chosse an available blockchain:',
-          choices: Object.values(Blockchain).map(b => ({ name: b, value: b }))
+      if (walletAlreadyExists) {
+        io.print('This address already exists in the database. Linking it to the watchlist...')
+      } else {
+        walletNickname = await io.input({
+          message: 'Enter wallet nickname (or don\'t):',
+          validation: false
         })
+
+        await logger.info({ value: typeof walletNickname}, 'Wallet nickname type')
+  
+        const userWantsToSetBlockchain = await io.select({
+          message: 'Do you want to set a blockchain for this wallet?',
+          choices: [
+            { name: 'Yes', value: true },
+            { name: 'No', value: false },
+          ]
+        })
+  
+        if (userWantsToSetBlockchain) {
+          walletBlockchain = await io.select({
+            message: 'Choose an available blockchain:',
+            choices: Object.values(Blockchain).map(b => ({ name: b, value: b }))
+          })
+        }
       }
 
       await prisma.watchlist.update({
