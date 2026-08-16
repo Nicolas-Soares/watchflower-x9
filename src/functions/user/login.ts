@@ -35,13 +35,9 @@ export async function login(): Promise<User> {
   
     if (['create-new-user', 'delete-user', 'edit-user'].includes(userSelection)) {
       switch (userSelection) {
-        case 'create-new-user': return await createNewUser()
-        case 'edit-user':
-          await editUser()
-          return await login()
-        case 'delete-user':
-          await deleteUser()
-          return await login()
+        case 'create-new-user':                 return await createNewUser()
+        case 'edit-user': await editUser();     return await login()
+        case 'delete-user': await deleteUser(); return await login()
       }
     }
   

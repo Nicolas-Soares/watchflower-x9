@@ -156,8 +156,7 @@ export default async function (): Promise<void> {
 
       io.print(`Address removed from ${watchlist?.name}`)
       break
-    case 'return':
-      return
+    case 'return': return
   }
 
   await io.pressEnterToContinue()
