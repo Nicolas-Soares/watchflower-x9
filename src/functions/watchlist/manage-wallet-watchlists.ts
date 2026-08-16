@@ -12,9 +12,9 @@ export async function manageWalletWatchlists(): Promise<void> {
     const option = await io.select({
       message: '=== Manage Wallet Watchlists ===',
       choices: [
-        { name: 'Edit existing watchlist', value: 'edit-watchlist' },
-        { name: 'Delete watchlist', value: 'delete-watchlist' },
-        { name: 'Return to main menu', value: 'main-menu' }
+        { name: '[#] Edit existing watchlist', value: 'edit-watchlist' },
+        { name: '[-] Delete watchlist', value: 'delete-watchlist' },
+        { name: '<< Return to main menu', value: 'main-menu' }
       ]
     });
   

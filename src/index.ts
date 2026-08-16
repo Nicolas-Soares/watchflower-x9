@@ -41,7 +41,7 @@ async function main() {
           { name: '[$] Get wallet balance', value: 'balance' },
           { name: '[+] Create new watchlist', value: 'create-watchlist' },
           { name: '[#] Manage wallet watchlists', value: 'manage-watchlists' },
-          { name: '[X] Exit', value: 'exit' }
+          { name: '<< Exit', value: 'exit' }
         ]
       })
       

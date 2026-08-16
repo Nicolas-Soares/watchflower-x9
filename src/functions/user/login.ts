@@ -26,9 +26,9 @@ export async function login(): Promise<User> {
     const userSelection = await io.select({
       message: '=== Choose an user ===',
       choices: [
-        { name: '+ Create new user', value: 'create-new-user' },
-        { name: '- Delete user', value: 'delete-user' },
-        { name: '# Edit user', value: 'edit-user' },
+        { name: '[+] Create new user', value: 'create-new-user' },
+        { name: '[-] Delete user', value: 'delete-user' },
+        { name: '[#] Edit user', value: 'edit-user' },
         ...users.map(user => ({ name: user.username, value: user.id }))
       ]
     })
