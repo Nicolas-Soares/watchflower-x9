@@ -39,9 +39,9 @@ export default async function (): Promise<void> {
     },
   })
 
-  const walletsFormattedDataToPrint = `${watchlistWallets.map(w => `${w.blockchain} | ${w.nickname} | ${w.address}`).join('\n')}`
+  const walletsFormattedDataToPrint = `${watchlistWallets.map(w => `${w.network} | ${w.nickname} | ${w.address}`).join('\n')}`
 
-  io.print('CHAIN | WALLET | ADDRESS\n')
+  io.print('NETWORK | WALLET | ADDRESS\n')
   io.print(walletsFormattedDataToPrint)
   await io.pressEnterToContinue()
 }

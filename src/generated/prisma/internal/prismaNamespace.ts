@@ -697,7 +697,7 @@ export const WalletScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   nickname: 'nickname',
-  blockchain: 'blockchain',
+  network: 'network',
   address: 'address'
 } as const
 
@@ -781,16 +781,16 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'Blockchain'
+ * Reference to a field of type 'Network'
  */
-export type EnumBlockchainFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Blockchain'>
+export type EnumNetworkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Network'>
     
 
 
 /**
- * Reference to a field of type 'Blockchain[]'
+ * Reference to a field of type 'Network[]'
  */
-export type ListEnumBlockchainFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Blockchain[]'>
+export type ListEnumNetworkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Network[]'>
     
 
 

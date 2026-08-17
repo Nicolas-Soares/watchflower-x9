@@ -29,7 +29,7 @@ export type WalletMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   nickname: string | null
-  blockchain: $Enums.Blockchain | null
+  network: $Enums.Network | null
   address: string | null
 }
 
@@ -38,7 +38,7 @@ export type WalletMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   nickname: string | null
-  blockchain: $Enums.Blockchain | null
+  network: $Enums.Network | null
   address: string | null
 }
 
@@ -47,7 +47,7 @@ export type WalletCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   nickname: number
-  blockchain: number
+  network: number
   address: number
   _all: number
 }
@@ -58,7 +58,7 @@ export type WalletMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   nickname?: true
-  blockchain?: true
+  network?: true
   address?: true
 }
 
@@ -67,7 +67,7 @@ export type WalletMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   nickname?: true
-  blockchain?: true
+  network?: true
   address?: true
 }
 
@@ -76,7 +76,7 @@ export type WalletCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   nickname?: true
-  blockchain?: true
+  network?: true
   address?: true
   _all?: true
 }
@@ -158,7 +158,7 @@ export type WalletGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   nickname: string
-  blockchain: $Enums.Blockchain
+  network: $Enums.Network
   address: string
   _count: WalletCountAggregateOutputType | null
   _min: WalletMinAggregateOutputType | null
@@ -188,7 +188,7 @@ export type WalletWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   nickname?: Prisma.StringFilter<"Wallet"> | string
-  blockchain?: Prisma.EnumBlockchainFilter<"Wallet"> | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFilter<"Wallet"> | $Enums.Network
   address?: Prisma.StringFilter<"Wallet"> | string
   watchlists?: Prisma.WatchlistListRelationFilter
 }
@@ -198,7 +198,7 @@ export type WalletOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   nickname?: Prisma.SortOrder
-  blockchain?: Prisma.SortOrder
+  network?: Prisma.SortOrder
   address?: Prisma.SortOrder
   watchlists?: Prisma.WatchlistOrderByRelationAggregateInput
 }
@@ -212,7 +212,7 @@ export type WalletWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   nickname?: Prisma.StringFilter<"Wallet"> | string
-  blockchain?: Prisma.EnumBlockchainFilter<"Wallet"> | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFilter<"Wallet"> | $Enums.Network
   watchlists?: Prisma.WatchlistListRelationFilter
 }, "id" | "address">
 
@@ -221,7 +221,7 @@ export type WalletOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   nickname?: Prisma.SortOrder
-  blockchain?: Prisma.SortOrder
+  network?: Prisma.SortOrder
   address?: Prisma.SortOrder
   _count?: Prisma.WalletCountOrderByAggregateInput
   _max?: Prisma.WalletMaxOrderByAggregateInput
@@ -236,7 +236,7 @@ export type WalletScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Wallet"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Wallet"> | Date | string
   nickname?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
-  blockchain?: Prisma.EnumBlockchainWithAggregatesFilter<"Wallet"> | $Enums.Blockchain
+  network?: Prisma.EnumNetworkWithAggregatesFilter<"Wallet"> | $Enums.Network
   address?: Prisma.StringWithAggregatesFilter<"Wallet"> | string
 }
 
@@ -245,7 +245,7 @@ export type WalletCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   nickname?: string
-  blockchain?: $Enums.Blockchain
+  network?: $Enums.Network
   address: string
   watchlists?: Prisma.WatchlistCreateNestedManyWithoutWalletsInput
 }
@@ -255,7 +255,7 @@ export type WalletUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   nickname?: string
-  blockchain?: $Enums.Blockchain
+  network?: $Enums.Network
   address: string
   watchlists?: Prisma.WatchlistUncheckedCreateNestedManyWithoutWalletsInput
 }
@@ -265,7 +265,7 @@ export type WalletUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
-  blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFieldUpdateOperationsInput | $Enums.Network
   address?: Prisma.StringFieldUpdateOperationsInput | string
   watchlists?: Prisma.WatchlistUpdateManyWithoutWalletsNestedInput
 }
@@ -275,7 +275,7 @@ export type WalletUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
-  blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFieldUpdateOperationsInput | $Enums.Network
   address?: Prisma.StringFieldUpdateOperationsInput | string
   watchlists?: Prisma.WatchlistUncheckedUpdateManyWithoutWalletsNestedInput
 }
@@ -285,7 +285,7 @@ export type WalletCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   nickname?: string
-  blockchain?: $Enums.Blockchain
+  network?: $Enums.Network
   address: string
 }
 
@@ -294,7 +294,7 @@ export type WalletUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
-  blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFieldUpdateOperationsInput | $Enums.Network
   address?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -303,7 +303,7 @@ export type WalletUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
-  blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFieldUpdateOperationsInput | $Enums.Network
   address?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -312,7 +312,7 @@ export type WalletCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   nickname?: Prisma.SortOrder
-  blockchain?: Prisma.SortOrder
+  network?: Prisma.SortOrder
   address?: Prisma.SortOrder
 }
 
@@ -321,7 +321,7 @@ export type WalletMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   nickname?: Prisma.SortOrder
-  blockchain?: Prisma.SortOrder
+  network?: Prisma.SortOrder
   address?: Prisma.SortOrder
 }
 
@@ -330,7 +330,7 @@ export type WalletMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   nickname?: Prisma.SortOrder
-  blockchain?: Prisma.SortOrder
+  network?: Prisma.SortOrder
   address?: Prisma.SortOrder
 }
 
@@ -344,8 +344,8 @@ export type WalletOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type EnumBlockchainFieldUpdateOperationsInput = {
-  set?: $Enums.Blockchain
+export type EnumNetworkFieldUpdateOperationsInput = {
+  set?: $Enums.Network
 }
 
 export type WalletCreateNestedManyWithoutWatchlistsInput = {
@@ -391,7 +391,7 @@ export type WalletCreateWithoutWatchlistsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   nickname?: string
-  blockchain?: $Enums.Blockchain
+  network?: $Enums.Network
   address: string
 }
 
@@ -400,7 +400,7 @@ export type WalletUncheckedCreateWithoutWatchlistsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   nickname?: string
-  blockchain?: $Enums.Blockchain
+  network?: $Enums.Network
   address: string
 }
 
@@ -433,7 +433,7 @@ export type WalletScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Wallet"> | Date | string
   nickname?: Prisma.StringFilter<"Wallet"> | string
-  blockchain?: Prisma.EnumBlockchainFilter<"Wallet"> | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFilter<"Wallet"> | $Enums.Network
   address?: Prisma.StringFilter<"Wallet"> | string
 }
 
@@ -442,7 +442,7 @@ export type WalletUpdateWithoutWatchlistsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
-  blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFieldUpdateOperationsInput | $Enums.Network
   address?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -451,7 +451,7 @@ export type WalletUncheckedUpdateWithoutWatchlistsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
-  blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFieldUpdateOperationsInput | $Enums.Network
   address?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -460,7 +460,7 @@ export type WalletUncheckedUpdateManyWithoutWatchlistsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   nickname?: Prisma.StringFieldUpdateOperationsInput | string
-  blockchain?: Prisma.EnumBlockchainFieldUpdateOperationsInput | $Enums.Blockchain
+  network?: Prisma.EnumNetworkFieldUpdateOperationsInput | $Enums.Network
   address?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -500,7 +500,7 @@ export type WalletSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdAt?: boolean
   updatedAt?: boolean
   nickname?: boolean
-  blockchain?: boolean
+  network?: boolean
   address?: boolean
   watchlists?: boolean | Prisma.Wallet$watchlistsArgs<ExtArgs>
   _count?: boolean | Prisma.WalletCountOutputTypeDefaultArgs<ExtArgs>
@@ -511,7 +511,7 @@ export type WalletSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   createdAt?: boolean
   updatedAt?: boolean
   nickname?: boolean
-  blockchain?: boolean
+  network?: boolean
   address?: boolean
 }, ExtArgs["result"]["wallet"]>
 
@@ -520,7 +520,7 @@ export type WalletSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   createdAt?: boolean
   updatedAt?: boolean
   nickname?: boolean
-  blockchain?: boolean
+  network?: boolean
   address?: boolean
 }, ExtArgs["result"]["wallet"]>
 
@@ -529,11 +529,11 @@ export type WalletSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   nickname?: boolean
-  blockchain?: boolean
+  network?: boolean
   address?: boolean
 }
 
-export type WalletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "nickname" | "blockchain" | "address", ExtArgs["result"]["wallet"]>
+export type WalletOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "nickname" | "network" | "address", ExtArgs["result"]["wallet"]>
 export type WalletInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   watchlists?: boolean | Prisma.Wallet$watchlistsArgs<ExtArgs>
   _count?: boolean | Prisma.WalletCountOutputTypeDefaultArgs<ExtArgs>
@@ -551,7 +551,7 @@ export type $WalletPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     createdAt: Date
     updatedAt: Date
     nickname: string
-    blockchain: $Enums.Blockchain
+    network: $Enums.Network
     address: string
   }, ExtArgs["result"]["wallet"]>
   composites: {}
@@ -981,7 +981,7 @@ export interface WalletFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Wallet", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Wallet", 'DateTime'>
   readonly nickname: Prisma.FieldRef<"Wallet", 'String'>
-  readonly blockchain: Prisma.FieldRef<"Wallet", 'Blockchain'>
+  readonly network: Prisma.FieldRef<"Wallet", 'Network'>
   readonly address: Prisma.FieldRef<"Wallet", 'String'>
 }
     

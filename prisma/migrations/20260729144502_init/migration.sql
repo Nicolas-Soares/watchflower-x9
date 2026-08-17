@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Blockchain" AS ENUM ('UNKNOWN', 'BASE', 'ETHEREUM');
+CREATE TYPE "Network" AS ENUM ('UNKNOWN', 'BASE', 'ETHEREUM');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -19,7 +19,7 @@ CREATE TABLE "Wallet" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "nickname" TEXT NOT NULL DEFAULT 'Wallet',
-    "blockchain" "Blockchain" NOT NULL DEFAULT 'UNKNOWN',
+    "network" "Network" NOT NULL DEFAULT 'UNKNOWN',
     "address" TEXT NOT NULL,
     "watchListId" TEXT NOT NULL,
 

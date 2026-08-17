@@ -9,7 +9,7 @@ datasource db {
   provider = "postgresql"
 }
 
-enum Blockchain {
+enum Network {
   UNKNOWN
   BASE
   ETHEREUM
@@ -35,7 +35,7 @@ model Wallet {
   updatedAt   DateTime    @updatedAt
 
   nickname    String      @default("Wallet")
-  blockchain  Blockchain  @default(UNKNOWN)
+  network     Network     @default(UNKNOWN)
   address     String      @unique
 
   watchlists  Watchlist[]

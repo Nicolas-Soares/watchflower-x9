@@ -6,7 +6,7 @@ import io from '../../utils/io-util.js'
 import { logger } from '../../utils/logger-util.js'
 
 // TYPES
-import { Blockchain } from '../../shared/types/blockchain.enum.js'
+import { Network } from '../../shared/types/network.enum.js'
 
 // GLOBALS
 import { ACTIVE_USER } from '../../shared/active-user.js'
@@ -45,9 +45,9 @@ export default async function (): Promise<void> {
     },
   })
 
-  const walletsFormattedDataToPrint = `${watchlistWallets.map(w => `${w.blockchain} | ${w.nickname} | ${w.address}`).join('\n')}`
+  const walletsFormattedDataToPrint = `${watchlistWallets.map(w => `${w.network} | ${w.nickname} | ${w.address}`).join('\n')}`
 
-  io.print('CHAIN | WALLET | ADDRESS\n')
+  io.print('NETWORK | WALLET | ADDRESS\n')
   io.print(walletsFormattedDataToPrint)
 
   const editOption = await io.select({
@@ -73,7 +73,7 @@ export default async function (): Promise<void> {
       io.print(`Changed ${watchlist?.name} to --> ${newWatchlistName}`)
       break
     case 'add-wallet':
-      let walletBlockchain: null | Blockchain = null
+      let walletNetwork: null | Network = null
       let walletNickname: null | string = null
 
       const walletAddrs = await io.input({ message: 'Enter wallet address:' })
@@ -92,18 +92,18 @@ export default async function (): Promise<void> {
 
         await logger.info({ value: typeof walletNickname}, 'Wallet nickname type')
   
-        const userWantsToSetBlockchain = await io.select({
-          message: 'Do you want to set a blockchain for this wallet?',
+        const userWantsToSetNetwork = await io.select({
+          message: 'Do you want to set a network for this wallet?',
           choices: [
             { name: 'Yes', value: true },
             { name: 'No', value: false },
           ]
         })
   
-        if (userWantsToSetBlockchain) {
-          walletBlockchain = await io.select({
-            message: 'Choose an available blockchain:',
-            choices: Object.values(Blockchain).map(b => ({ name: b, value: b }))
+        if (userWantsToSetNetwork) {
+          walletNetwork = await io.select({
+            message: 'Choose an available network:',
+            choices: Object.values(Network).map(b => ({ name: b, value: b }))
           })
         }
       }
@@ -117,7 +117,7 @@ export default async function (): Promise<void> {
               create: {
                 address: walletAddrs,
                 ...(walletNickname && { nickname: walletNickname }),
-                ...(walletBlockchain && { blockchain: walletBlockchain })
+                ...(walletNetwork && { network: walletNetwork })
               }
             }
           }
@@ -132,14 +132,14 @@ export default async function (): Promise<void> {
       const walletSelection = await io.select({
         message: '=== Select a wallet to edit ===',
         choices: [
-          ...watchlistWallets.map(w => ({ name: `${w.blockchain} | ${w.nickname} | ${w.address}`, value: w.id }))
+          ...watchlistWallets.map(w => ({ name: `${w.network} | ${w.nickname} | ${w.address}`, value: w.id }))
         ]
       })
 
       const editSelection = await io.select({
         message: '=== What do you want to edit? ===',
         choices: [
-          { name: 'Chain', value: 'blockchain' },
+          { name: 'Network', value: 'network' },
           { name: 'Nickname', value: 'nickname' },
           { name: 'Address', value: 'address' },
         ]
@@ -147,10 +147,10 @@ export default async function (): Promise<void> {
 
       let value
 
-      if (editSelection == 'blockchain') {
+      if (editSelection == 'network') {
         value = await io.select({
-          message: '=== Select a blockchain ===',
-          choices: Object.values(Blockchain).map(b => ({ name: b, value: b }))
+          message: '=== Select a network ===',
+          choices: Object.values(Network).map(b => ({ name: b, value: b }))
         })
       } else {
         value = await io.input({ message: `Enter new ${editSelection}` })

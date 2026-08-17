@@ -89,7 +89,7 @@ export const WalletScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   nickname: 'nickname',
-  blockchain: 'blockchain',
+  network: 'network',
   address: 'address'
 } as const
 

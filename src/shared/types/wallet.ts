@@ -1,4 +1,4 @@
-import type { Blockchain } from "./blockchain.enum.js"
+import type { Network } from "./network.enum.js"
 import type { Watchlist } from "./watchlist.js"
 
 export interface Wallet {
@@ -6,7 +6,7 @@ export interface Wallet {
   createdAt:    Date,
   updatedAt:    Date,
   nickname:     string,
-  blockchain?:  Blockchain,
+  network?:     Network,
   address:      string,
   watchlists?:  Watchlist[]
 }

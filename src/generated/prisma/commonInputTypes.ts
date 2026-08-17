@@ -123,21 +123,21 @@ export type BoolWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
 }
 
-export type EnumBlockchainFilter<$PrismaModel = never> = {
-  equals?: $Enums.Blockchain | Prisma.EnumBlockchainFieldRefInput<$PrismaModel>
-  in?: $Enums.Blockchain[] | Prisma.ListEnumBlockchainFieldRefInput<$PrismaModel>
-  notIn?: $Enums.Blockchain[] | Prisma.ListEnumBlockchainFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumBlockchainFilter<$PrismaModel> | $Enums.Blockchain
+export type EnumNetworkFilter<$PrismaModel = never> = {
+  equals?: $Enums.Network | Prisma.EnumNetworkFieldRefInput<$PrismaModel>
+  in?: $Enums.Network[] | Prisma.ListEnumNetworkFieldRefInput<$PrismaModel>
+  notIn?: $Enums.Network[] | Prisma.ListEnumNetworkFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNetworkFilter<$PrismaModel> | $Enums.Network
 }
 
-export type EnumBlockchainWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.Blockchain | Prisma.EnumBlockchainFieldRefInput<$PrismaModel>
-  in?: $Enums.Blockchain[] | Prisma.ListEnumBlockchainFieldRefInput<$PrismaModel>
-  notIn?: $Enums.Blockchain[] | Prisma.ListEnumBlockchainFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumBlockchainWithAggregatesFilter<$PrismaModel> | $Enums.Blockchain
+export type EnumNetworkWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.Network | Prisma.EnumNetworkFieldRefInput<$PrismaModel>
+  in?: $Enums.Network[] | Prisma.ListEnumNetworkFieldRefInput<$PrismaModel>
+  notIn?: $Enums.Network[] | Prisma.ListEnumNetworkFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNetworkWithAggregatesFilter<$PrismaModel> | $Enums.Network
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBlockchainFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBlockchainFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNetworkFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNetworkFilter<$PrismaModel>
 }
 
 export type NestedStringFilter<$PrismaModel = never> = {
@@ -262,21 +262,21 @@ export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
 }
 
-export type NestedEnumBlockchainFilter<$PrismaModel = never> = {
-  equals?: $Enums.Blockchain | Prisma.EnumBlockchainFieldRefInput<$PrismaModel>
-  in?: $Enums.Blockchain[] | Prisma.ListEnumBlockchainFieldRefInput<$PrismaModel>
-  notIn?: $Enums.Blockchain[] | Prisma.ListEnumBlockchainFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumBlockchainFilter<$PrismaModel> | $Enums.Blockchain
+export type NestedEnumNetworkFilter<$PrismaModel = never> = {
+  equals?: $Enums.Network | Prisma.EnumNetworkFieldRefInput<$PrismaModel>
+  in?: $Enums.Network[] | Prisma.ListEnumNetworkFieldRefInput<$PrismaModel>
+  notIn?: $Enums.Network[] | Prisma.ListEnumNetworkFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNetworkFilter<$PrismaModel> | $Enums.Network
 }
 
-export type NestedEnumBlockchainWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.Blockchain | Prisma.EnumBlockchainFieldRefInput<$PrismaModel>
-  in?: $Enums.Blockchain[] | Prisma.ListEnumBlockchainFieldRefInput<$PrismaModel>
-  notIn?: $Enums.Blockchain[] | Prisma.ListEnumBlockchainFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumBlockchainWithAggregatesFilter<$PrismaModel> | $Enums.Blockchain
+export type NestedEnumNetworkWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.Network | Prisma.EnumNetworkFieldRefInput<$PrismaModel>
+  in?: $Enums.Network[] | Prisma.ListEnumNetworkFieldRefInput<$PrismaModel>
+  notIn?: $Enums.Network[] | Prisma.ListEnumNetworkFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumNetworkWithAggregatesFilter<$PrismaModel> | $Enums.Network
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBlockchainFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBlockchainFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumNetworkFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumNetworkFilter<$PrismaModel>
 }
 
 

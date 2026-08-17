@@ -9,10 +9,10 @@
 * 🟢 You can import this file directly.
 */
 
-export const Blockchain = {
+export const Network = {
   UNKNOWN: 'UNKNOWN',
   BASE: 'BASE',
   ETHEREUM: 'ETHEREUM'
 } as const
 
-export type Blockchain = (typeof Blockchain)[keyof typeof Blockchain]
+export type Network = (typeof Network)[keyof typeof Network]

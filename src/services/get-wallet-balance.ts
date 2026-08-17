@@ -5,7 +5,7 @@ import { formatEther  } from 'viem'
 import {
   baseClient,
   ethereumClient
-} from '../clients/blockchain-clients.js'
+} from '../clients/network-clients.js'
 
 // UTILS
 import io from '../utils/io-util.js'
