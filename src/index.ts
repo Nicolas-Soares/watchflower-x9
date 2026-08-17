@@ -1,9 +1,6 @@
 // LIBS
 import 'dotenv/config'
 
-// CLIENTS
-import { baseClient } from './clients/base.js'
-
 // UTILS
 import { logger } from './utils/logger-util.js'
 import { appTitle } from './utils/print-app-title-util.js'
@@ -46,7 +43,7 @@ async function main() {
       })
       
       switch (option) {
-        case 'balance': await getWalletBalance({ client: baseClient }); break;
+        case 'balance': await getWalletBalance(); break;
         case 'show-watchlist': await showWatchlist();                   break;
         case 'create-watchlist': await createWatchlist();               break;
         case 'edit-watchlist': await editWatchlist();                   break;
