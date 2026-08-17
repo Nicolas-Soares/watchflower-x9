@@ -14,15 +14,15 @@ export async function getWalletBalance({ client }: { client: any }): Promise<voi
   io.printAppTitle()
   io.print('=== Get Wallet Balance ===')
   
-  const walletAddress = await io.input({ message: 'Insert wallet address:' })
+  const walletAddress = (await io.input({ message: 'Insert wallet address:' })).toLowerCase()
   
   const weiBalance = await getBalance({ client, address: walletAddress })
   const ethBalance = formatEther(weiBalance)
 
   const baseUsdcBalance = await getBaseUSDC({ client, address: walletAddress })
 
-  io.print(`Balance: ${ethBalance} ETH`)
-  io.print(`Balance: ${baseUsdcBalance} USDC`)
+  io.print(`ETH: ${ethBalance}`)
+  io.print(`USDC: ${baseUsdcBalance}`)
 
   await io.pressEnterToContinue()
 }
